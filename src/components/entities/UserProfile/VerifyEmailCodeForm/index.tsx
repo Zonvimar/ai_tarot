@@ -146,7 +146,7 @@ const VerifyEMailCodeForm: FC<Props> = ({resetPassword, email, handleCheck, hand
                                         ref={inputRefs[index]}
                                         autoFocus={index === 0}
                                         onFocus={handleFocus}
-                                        type={'number'}
+                                        type={'tel'}
                                         onKeyDown={(e) => handleKeyDown(e, index)}
                                         onPaste={handlePaste}
                                         classNames={{
