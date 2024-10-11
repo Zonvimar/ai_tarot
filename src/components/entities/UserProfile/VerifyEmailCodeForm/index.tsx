@@ -85,7 +85,7 @@ const VerifyEMailCodeForm: FC<Props> = ({resetPassword, email, handleCheck, hand
     // Capture pasted characters
     const handlePaste = (e: any) => {
         const pastedCode = e.clipboardData.getData('text');
-        if (pastedCode.length === 6) {
+        if (pastedCode.length === 4) {
             setCode(pastedCode);
             inputRefs.forEach((inputRef, index) => {
                 // @ts-ignore
