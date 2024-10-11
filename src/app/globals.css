@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  transition-delay: 9999s;
+}
+
+@layer base {
+  html {
+    font-family: "Rubik", sans-serif;
+  }
+}
+
+#page-input::-webkit-outer-spin-button,
+#page-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+body {
+  @apply h-full w-full overflow-x-hidden
+}
