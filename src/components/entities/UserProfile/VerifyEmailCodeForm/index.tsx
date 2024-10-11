@@ -141,12 +141,12 @@ const VerifyEMailCodeForm: FC<Props> = ({resetPassword, email, handleCheck, hand
                                 {[0, 1, 2, 3].map((index) => (
                                     <Input
                                         key={index}
-                                        type="text"
                                         maxLength={1}
                                         onChange={(e) => handleInput(e, index)}
                                         ref={inputRefs[index]}
                                         autoFocus={index === 0}
                                         onFocus={handleFocus}
+                                        type={'number'}
                                         onKeyDown={(e) => handleKeyDown(e, index)}
                                         onPaste={handlePaste}
                                         classNames={{
