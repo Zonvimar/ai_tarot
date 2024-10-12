@@ -9,7 +9,19 @@ const config: Config = {
         './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            animation: {
+                scaleUpDown: 'scaleUpDown 2s ease-in-out infinite',
+                scaleUpDown2: 'scaleUpDown 2s ease-in-out 0.3s infinite',
+                scaleUpDown3: 'scaleUpDown 2s ease-in-out 0.6s infinite',
+            },
+            keyframes: {
+                scaleUpDown: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '30%': { transform: 'scale(1.3)' },
+                },
+            },
+        },
     },
     plugins: [nextui({
         layout: {

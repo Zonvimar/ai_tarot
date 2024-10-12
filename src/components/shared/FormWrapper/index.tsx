@@ -15,6 +15,7 @@ type CustomFormProps = {
     disablePaddings?: boolean,
     withoutPopover?: boolean,
     clearAfterSubmit?: boolean,
+    customButton?: React.ReactNode,
     infoUnderButton?: React.ReactNode | boolean
 } & React.ComponentProps<'form'>
 
@@ -28,7 +29,8 @@ const FormWrapper: FC<CustomFormProps> = ({
                                               disablePaddings = false,
                                               clearAfterSubmit = false,
                                               setInvalid,
-                                              infoUnderButton
+                                              infoUnderButton,
+                                              customButton,
                                           }) => {
 
     const formRef = useRef<HTMLFormElement>(null)
@@ -62,20 +64,26 @@ const FormWrapper: FC<CustomFormProps> = ({
     return (
         <form
             action={handleSubmit}
-            className={`flex flex-col min-h-[calc(100dvh-70px)] h-full justify-center gap-2 w-full`}
+            className={`flex flex-col min-h-[calc(100dvh-50px)] h-full justify-center gap-2 w-full`}
             onClick={e => e.stopPropagation()}
             ref={formRef}
         >
-            <div className={`flex-grow overflow-y-auto ${infoUnderButton ? 'max-h-[calc(100dvh-185px)]' : 'max-h-[calc(100dvh-155px)]'}`}>
+            <div className={`flex-grow overflow-y-auto ${infoUnderButton ? 'max-h-[calc(100dvh-152px)]' : 'max-h-[calc(100dvh-117px)]'}`}>
                 {children}
             </div>
             {
                 !withOutDefaultButton &&
-                <div className="flex-shrink-0 flex justify-center flex-col gap-2 w-full ifems-center">
-                    <SubmitButton label={actionLabel}/>
-                    {infoUnderButton && infoUnderButton}
+                    <div className="flex-shrink-0 flex justify-center flex-col gap-2 w-full ifems-center">
+                        <SubmitButton label={actionLabel}/>
+                        {infoUnderButton && infoUnderButton}
 
-                </div>
+                    </div>
+            }
+            {
+                customButton &&
+                    <div className="flex-shrink-0 flex justify-center flex-col gap-2 w-full ifems-center">
+                        {customButton}
+                    </div>
             }
         </form>
     )

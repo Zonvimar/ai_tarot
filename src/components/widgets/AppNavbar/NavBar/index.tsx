@@ -31,7 +31,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Navbar className={'z-50 bg-opacity-0'} isBlurred={false} height={'60px'} maxWidth={'full'} classNames={{
+            <Navbar className={'z-50 bg-opacity-0'} isBlurred={false} height={'36px'} maxWidth={'full'} classNames={{
                 item: [
                     // "flex",
                     // "relative",
@@ -48,9 +48,16 @@ const NavBar = () => {
                     // "data-[active=true]:after:bg-content1",
                 ],
                 wrapper: [
-                    'px-2'
+                    'px-2 mt-1.5'
                 ]
             }}>
+                <NavbarContent justify="start">
+                </NavbarContent>
+                <NavbarContent className={`${pathname !== '/auth/onboard' ? 'hidden' : ''}`} justify="center">
+                    <NavbarItem>
+                        <p className={'text-xl font-semibold'}>Aita, ai tarologist</p>
+                    </NavbarItem>
+                </NavbarContent>
                 <NavbarContent justify="end">
                     <NavbarItem>
                         {getNavItem()}

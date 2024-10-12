@@ -12,12 +12,12 @@ const AppLayout = async({children}: { children: React.ReactNode }) => {
     //     return redirect('/auth')
     // }
     return (
-        <div className={'min-h-[calc(100dvh)] bg-[url("/img_2.png")] bg-cover bg-center'}>
+        <div className={'min-h-[calc(100dvh)] bg-[url("/Background.png")] bg-cover bg-center'}>
             {/*<div className={'flex overflow-hidden'}>*/}
                 <AppNavbar/>
             {/*</div>*/}
             {/*<div className={`h-full  overflow-y-hidden`}>*/}
-                <main className={'min-h-[calc(100dvh-60px)] px-2 pt-2 h-full overflow-auto'}>
+                <main className={'min-h-[calc(100dvh-42px)] px-2 h-full overflow-auto'}>
                     {children}
                 </main>
             {/*</div>*/}
