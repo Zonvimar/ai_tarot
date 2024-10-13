@@ -10,6 +10,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            backgroundImage: {
+                'gradient-with-image': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/Background.png')",
+            },
             animation: {
                 scaleUpDown: 'scaleUpDown 2s ease-in-out infinite',
                 scaleUpDown2: 'scaleUpDown 2s ease-in-out 0.3s infinite',

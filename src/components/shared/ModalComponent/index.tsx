@@ -104,11 +104,15 @@ const ModalComponent: FC<ModalComponentProps> = ({
                         }
                     </Button>
             }
-            <Modal closeButton={
+            <Modal classNames={{
+                wrapper: 'm-0',
+                closeButton: 'bg-black bg-opacity-60 p-1.5 w-8 h-8 rounded-full items-center justify-center flex'
+            }}
+                closeButton={
                 <Button variant={`${withoutModalHeader ? 'default' : 'ghost'}`} className={'p-0'} size={'icon'}>
                     <Cross1Icon className={`${withoutModalHeader && 'text-white'}`}/>
                 </Button>}
-                   isOpen={open} isDismissable={isDismissable} onOpenChange={setOpen} size={modalSize} className={`${withoutModalHeader && 'p-0 w-fit h-fit'} overflow-hidden max-h-[85vh]`}>
+                   isOpen={open} isDismissable={isDismissable} onOpenChange={setOpen} size={modalSize} className={`${withoutModalHeader && 'p-0 w-fit h-fit'} bg-[#343434] rounded-b-none sm:rounded-b-large m-0 overflow-hidden max-h-[85vh]`}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -117,7 +121,7 @@ const ModalComponent: FC<ModalComponentProps> = ({
                                     {modalHeader}
                                 </ModalHeader>
                             }
-                            <ModalBody className={`${withoutModalHeader && 'p-0'} overflow-auto`}>
+                            <ModalBody className={`${withoutModalHeader && 'p-0'} px-4 overflow-auto`}>
                                 {children}
                             </ModalBody>
                             {!withoutAction &&
