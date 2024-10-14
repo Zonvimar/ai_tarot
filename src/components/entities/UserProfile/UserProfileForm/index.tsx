@@ -2,12 +2,13 @@
 import TextField from '@/components/shared/Inputs/TextField'
 import React, {FC, useMemo, useState} from 'react'
 import PasswordField from "@/components/shared/Inputs/PasswordField";
-import {DatePicker} from "@nextui-org/react";
+import {DateInput, DatePicker, DateValue} from "@nextui-org/react";
 import {Image} from "@nextui-org/image";
 import FormWrapper from "@/components/shared/FormWrapper";
 import Link from "next/link";
 import {ActionResponse} from "@/configs/http-service/fetch-settings/types";
 import {useSearchParams} from "next/navigation";
+import {I18nProvider} from "@react-aria/i18n";
 
 type Props = {
     // addInfo: boolean,
@@ -20,6 +21,8 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
     const [emailValue, setEmailValue] = useState("");
     const [emailExists, setEmailExists] = useState(false);
     const [selectedGender, setSelectedGender] = useState("female");
+    const [dateOfBirth, setDateOfBirth] = useState<DateValue | null | undefined>(null);
+    const [dateOfBirthExists, setDateOfBirthExists] = useState(false);
     // const router = useRouter()
     const searchParams = useSearchParams();
     const addInfo = !!searchParams?.get('addInfo')
@@ -53,23 +56,52 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                          </p>
                                      </div>
                                  }
-                                 setInvalid={setEmailExists}
+                                 setInvalid={addInfo ? setDateOfBirthExists : setEmailExists}
                                  actionLabel={addInfo ? 'Complete & get tarot spread' : 'Create account'}
                     >
                         <input hidden name={'email'} value={emailValue}/>
                         <input hidden name={'password'} value={value}/>
                         <input hidden name={'gender'} value={selectedGender}/>
                         <div className={'flex flex-col w-full gap-6 h-full '}>
-                            <div className={'w-full flex flex-col gap-2 justify-center text-center items-center'}>
-                                {/*<div className={'w-full h-[64px]'}></div>*/}
-                                <Image src={'/img_3.png'} alt={'logo'} width={200} height={200}/>
-                                <h1 className={'w-full text-center text-2xl font-bold'}>
-                                    {addInfo ?
-                                        'Please provide details for a more accurate tarot reading'
-                                        :
-                                        'Create account to save your chat with the AI taro reader'
-                                    }
-                                </h1>
+                            <div className={'w-full flex flex-col gap-6 justify-center items-center text-center'}>
+                                <div className={'flex-col gap-2 hidden sm:flex'}>
+                                    <p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>
+                                    <div className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs sm:text-medium  font-normal'}>
+                                        <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
+                                        Always online to help you find answers
+                                    </div>
+                                </div>
+                                <Image
+                                    src={'/img_3.png'}
+                                    alt={'logo'}
+                                    width={325}
+                                    height={325}
+                                    // removeWrapper
+                                    classNames={{
+                                        img: [
+                                            'backdrop-blur-xs',
+                                        ],
+                                        wrapper: [
+                                            'rounded-full shadow-[#22879D] shadow-[0_0_25px_1px_rgba(0,0,0,0.3)] mt-4 sm:mt-0 bg-opacity-55 bg-[#22879D]'
+                                        ]
+                                    }}
+
+                                    style={{
+                                        width: '50vw',  // Используем относительную ширину в зависимости от ширины окна
+                                        maxWidth: '325px',  // Ограничиваем максимальную ширину
+                                        height: 'auto',  // Автоматическая высота для сохранения пропорций
+                                        transition: 'width 0.5s ease-in-out',  // Плавная анимация изменения ширины
+                                    }}
+                                />
+                                <div className={'flex flex-col gap-2'}>
+                                    <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
+                                        {addInfo ?
+                                            'Please provide details for a more accurate tarot reading'
+                                            :
+                                            'Create account to save your chat with the AI taro reader'
+                                        }
+                                    </h1>
+                                </div>
                             </div>
                             <div className={'flex flex-col gap-2'}>
                                 {/*    */}
@@ -82,34 +114,70 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                             className={'text-xl'}
                                             placeholder={'Georgii'}
                                             name={'username'}
+                                            errorMessage={'lfkasjdklfjd'}
                                             // type={'email'}
                                         />
-                                        <DatePicker
-                                            name={'dateOfBirth'}
-                                            isRequired
-                                            labelPlacement={'outside'}
-                                            size={'lg'}
-                                            label="Date of birth"
-                                            variant={'faded'}
-                                            dateInputClassNames={{
-                                                inputWrapper: 'border-[1px] h-[60px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
-                                                label: 'text-[#ECEDEE] font-semibold text-sm group-data-[required=true]:after:hidden',
-                                                input: 'placeholder:text-[#E9E9E9]'
-                                            }}
-                                            showMonthAndYearPickers
-                                        />
-                                        <div className="flex flex-col items-start">
-                                            <h2 className="mb-1 text-white text-sm font-semibold">Choose your
+                                        {/*<DateInput*/}
+                                        {/*    name={'dateOfBirth'}*/}
+                                        {/*    isRequired={true}*/}
+                                        {/*    labelPlacement={'outside'}*/}
+                                        {/*    size={'lg'}*/}
+                                        {/*    label="Date of birth"*/}
+                                        {/*    variant={'faded'}*/}
+                                        {/*    dateInputClassNames={{*/}
+                                        {/*        inputWrapper: 'border-[1px] h-[60px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',*/}
+                                        {/*        label: 'text-[#ECEDEE] font-semibold text-sm group-data-[required=true]:after:hidden',*/}
+                                        {/*        input: 'placeholder:text-[#E9E9E9]'*/}
+                                        {/*    }}*/}
+                                        {/*    showMonthAndYearPickers*/}
+                                        {/*/>*/}
+                                        <I18nProvider locale="en-GB">
+                                            <DatePicker
+                                                name={'dateOfBirth'}
+                                                isRequired={true}
+                                                labelPlacement={'outside'}
+                                                size={'lg'}
+                                                label="Date of birth"
+                                                variant={'faded'}
+                                                isInvalid={dateOfBirthExists}
+                                                errorMessage={'Please fill out this field'}
+                                                dateInputClassNames={{
+                                                    base: [
+                                                        'gap-y-0 pb-0'
+                                                    ],
+                                                    inputWrapper: [
+                                                        'border-[1px] h-[60px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
+                                                        'group-data-[invalid=true]:bg-default-100',
+                                                        'group-data-[invalid=true]:hover:bg-default-100',
+                                                        'group-data-[invalid=true]:focus-within:hover:bg-default-100'
+                                                    ],
+                                                    label: [
+                                                        'text-[#ECEDEE] font-semibold text-sm group-data-[required=true]:after:hidden',
+                                                        'group-data-[invalid=true]:text-[#E9E9E9] text-medium sm:text-lg'
+                                                    ],
+                                                    input: 'placeholder:text-[#E9E9E9]',
+                                                    segment: 'data-[editable=true]:data-[placeholder=true]:text-white uppercase'
+                                                }}
+                                                showMonthAndYearPickers
+                                                value={dateOfBirth}
+                                                onChange={(newDate) => {
+                                                    setDateOfBirthExists(false);
+                                                    setDateOfBirth(newDate)
+                                                }}
+                                            />
+                                        </I18nProvider>
+                                        <div className="flex flex-col items-start text-medium sm:text-lg">
+                                            <h2 className="mb-1 text-white font-semibold">Choose your
                                                 gender</h2>
                                             <div className="flex gap-4">
                                                 <button type={'button'}
-                                                    onClick={() => handleGenderChange("female")}
-                                                    className={`flex items-center justify-center w-[150px] h-[60px] text-white font-normal 
+                                                        onClick={() => handleGenderChange("female")}
+                                                        className={`flex items-center justify-center w-[150px] h-[60px] text-white font-normal 
                                                                 rounded-[48px] border-[1px] transition-all ${
-                                                                selectedGender === "female"
-                                                                    ? "bg-[#27ACC9] border-[#27ACC9]"
-                                                                    : "bg-[#2A2A2A] border-[#424242]"
-                                                                }`}
+                                                            selectedGender === "female"
+                                                                ? "bg-[#27ACC9] border-[#27ACC9]"
+                                                                : "bg-[#2A2A2A] border-[#424242]"
+                                                        }`}
                                                 >
                                                     <span className="flex items-center gap-2">
                                                         <Image src={'/female.svg'} height={32} width={20}/>
@@ -118,16 +186,17 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                                 </button>
 
                                                 <button type={'button'}
-                                                    onClick={() => handleGenderChange("male")}
-                                                    className={`flex items-center justify-center w-[150px] h-[60px] text-white font-normal 
+                                                        onClick={() => handleGenderChange("male")}
+                                                        className={`flex items-center justify-center w-[150px] h-[60px] text-white font-normal 
                                                                 rounded-[48px] border-[1px] transition-all ${
-                                                                selectedGender === "male"
-                                                                    ? "bg-[#27ACC9] border-[#27ACC9]"
-                                                                    : "bg-[#2A2A2A] border-[#424242]"
-                                                            }`}
+                                                            selectedGender === "male"
+                                                                ? "bg-[#27ACC9] border-[#27ACC9]"
+                                                                : "bg-[#2A2A2A] border-[#424242]"
+                                                        }`}
                                                 >
                                                     <span className="flex items-center gap-2">
-                                                        <Image src={'/male.svg'} radius={'none'} width={28} height={28}/>
+                                                        <Image src={'/male.svg'} radius={'none'} width={28}
+                                                               height={28}/>
                                                         Male
                                                     </span>
                                                 </button>

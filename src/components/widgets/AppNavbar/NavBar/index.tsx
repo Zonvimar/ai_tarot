@@ -16,14 +16,15 @@ const NavBar = () => {
     const getNavItem = () => {
         switch(pathname) {
             case '/':
-                return <p>100</p>
+                return <p className={'text-sm sm:text-lg'}>100</p>
             case '/auth/register':
+            case '/auth/onboard':
             case '/auth/approve-email':
             case '/auth/reset-password':
             case '/auth/new-password':
-                return <Link href={'/auth'} className={'font-bold text-[#27ACC9]'}>Log in</Link>
+                return <Link href={'/auth'} className={'font-bold text-[#27ACC9] text-sm sm:text-lg'}>Log in</Link>
             case '/auth':
-                return <Link href={'/auth/register'} className={'font-bold text-[#27ACC9]'}>Sign up</Link>
+                return <Link href={'/auth/register'} className={'font-bold text-[#27ACC9] text-sm sm:text-lg'}>Sign up</Link>
             default:
                 return null
         }
@@ -55,7 +56,7 @@ const NavBar = () => {
                 </NavbarContent>
                 <NavbarContent className={`${pathname !== '/auth/onboard' ? 'hidden' : ''}`} justify="center">
                     <NavbarItem>
-                        <p className={'text-xl font-semibold'}>Aita, ai tarologist</p>
+                        <p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>
                     </NavbarItem>
                 </NavbarContent>
                 <NavbarContent justify="end">

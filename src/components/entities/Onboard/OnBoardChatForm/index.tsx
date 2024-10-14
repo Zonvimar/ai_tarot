@@ -58,10 +58,10 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                     <div className={'flex flex-col w-full gap-6 h-full '}>
                         <div className={'w-full flex flex-col justify-center text-center'}>
                             <div className={'w-full flex flex-col gap-5 justify-center items-center text-center'}>
-                                <p className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs font-normal'}>
+                                <div className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs sm:text-medium  font-normal'}>
                                     <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
                                     Always online to help you find answers
-                                </p>
+                                </div>
                                 <Image
                                     src={'/img_5.png'}
                                     alt={'logo'}
@@ -91,7 +91,7 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                     Aita is typing
                                 </p>
                             </div>
-                            <div className={`${showSecondMessage && 'pt-5'} flex pl-2 flex-col gap-2 text-start items-start max-w-[330px]`}>
+                            <div className={`${showSecondMessage && 'pt-5'} text-medium sm:text-lg flex pl-2 flex-col gap-2 text-start items-start w-[70vw] max-w-[396px]`}>
                                 <div
                                     className={`${!showFirstMessage && 'hidden'} px-4 py-3 flex items-end flex-col bg-[#343434] rounded-tr-2xl rounded-b-3xl`}>
                                     <p className={''}>

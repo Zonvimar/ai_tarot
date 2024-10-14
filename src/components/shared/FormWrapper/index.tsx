@@ -68,7 +68,7 @@ const FormWrapper: FC<CustomFormProps> = ({
             onClick={e => e.stopPropagation()}
             ref={formRef}
         >
-            <div className={`flex-grow overflow-y-auto ${infoUnderButton ? 'max-h-[calc(100dvh-152px)]' : 'max-h-[calc(100dvh-117px)]'}`}>
+            <div className={`flex-grow overflow-y-auto ${infoUnderButton ? 'max-h-[calc(100dvh-152px)] sm:max-h-[calc(100dvh-162px)]' : 'max-h-[calc(100dvh-117px)] sm:max-h-[calc(100dvh-137px)]'}`}>
                 {children}
             </div>
             {

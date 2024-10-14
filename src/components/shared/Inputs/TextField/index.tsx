@@ -30,8 +30,9 @@ const TextField: FC<TextFieldProps> = ({
                 input: [
                     'h-full',
                     'placeholder:text-[#E9E9E9]',
+                    'text-medium sm:text-lg',
                 ],
-                label: 'text-sm font-semibold',
+                label: 'text-sm sm:text-xl font-semibold',
         }}
         />
     )
