@@ -5,6 +5,7 @@ import FormWrapper from "@/components/shared/FormWrapper";
 import {ActionResponse} from "@/configs/http-service/fetch-settings/types";
 import Link from "next/link";
 import {Image} from "@nextui-org/image";
+import ImageBlock from "@/components/entities/Auth/ImageBlock";
 
 type Props = {
     resetPassword: boolean,
@@ -123,52 +124,19 @@ const VerifyEMailCodeForm: FC<Props> = ({resetPassword, email, handleCheck, hand
                              actionLabel={'Verify'}>
                     <input hidden name={'code'} value={code}/>
                     <div className={'flex flex-col w-full gap-6 h-full '}>
-                        <div className={'w-full flex flex-col gap-6 justify-center items-center text-center'}>
-                            <div className={'flex-col gap-2 hidden sm:flex'}>
-                                <p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>
-                                <div className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs sm:text-medium  font-normal'}>
-                                    <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
-                                    Always online to help you find answers
-                                </div>
-                            </div>
-                            <Image
-                                src={'/img_3.png'}
-                                alt={'logo'}
-                                width={325}
-                                height={325}
-                                // removeWrapper
-                                classNames={{
-                                    img: [
-                                        'backdrop-blur-xs',
-                                    ],
-                                    wrapper: [
-                                        'rounded-full shadow-[#22879D] shadow-[0_0_25px_1px_rgba(0,0,0,0.3)] bg-opacity-55 bg-[#22879D]'
-                                    ]
-                                }}
+                        <ImageBlock imageSrc={'/img.png'}>
+                            <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
+                                {resetPassword ?
+                                    'Please check your email'
+                                    :
+                                    'Please verify your email'
+                                }
+                            </h1>
+                            <p className={'px-4 text-sm font-normal'}>
+                                I`ve sent a code to <span className={'font-bold'}>{email}</span>
+                            </p>
+                        </ImageBlock>
 
-                                style={{
-                                    width: '50vw',  // Используем относительную ширину в зависимости от ширины окна
-                                    maxWidth: '325px',  // Ограничиваем максимальную ширину
-                                    height: 'auto',  // Автоматическая высота для сохранения пропорций
-                                    transition: 'width 0.5s ease-in-out',  // Плавная анимация изменения ширины
-                                }}
-                            />
-                            <div className={'flex flex-col gap-2'}>
-                                <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
-                                    {resetPassword ?
-                                        'Please check your email'
-                                        :
-                                        'Please verify your email'
-                                    }
-                                </h1>
-                                <p className={'px-4 text-sm font-normal'}>
-                                    I`ve sent a code to <span className={'font-bold'}>{email}</span>
-                                </p>
-                            </div>
-                        </div>
-                        {/*<div className={'w-full flex pt-14 flex-col gap-2 justify-center text-center items-center'}>*/}
-
-                        {/*</div>*/}
                         <div className={'flex flex-col gap-2'}>
                             <div className="w-full flex gap-3 justify-center items-center">
                                 {[0, 1, 2, 3].map((index) => (
