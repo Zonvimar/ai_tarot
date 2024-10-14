@@ -3,6 +3,12 @@ import fetchService from "@/configs/http-service/fetch-settings";
 import {ActionResponse} from "@/configs/http-service/fetch-settings/types";
 import {Message} from "@/lib/types/chat.types";
 
+const askOnboardQuestion = async (fd: FormData): Promise<ActionResponse> => {
+    return {
+        status: 'ok',
+        message: ''
+    }
+}
 
 const sendMessage = async (fd: FormData): Promise<ActionResponse> => {
     try {
@@ -49,6 +55,7 @@ const getTaskMessages = async(taskId: string | number): Promise<Message[]> => {
 }
 
 export {
+    askOnboardQuestion,
     getTaskMessages,
     sendMessage
 }

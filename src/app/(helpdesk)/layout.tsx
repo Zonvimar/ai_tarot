@@ -5,22 +5,22 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import SideBar from "@/components/entities/SideBar";
+import {checkAuth} from "@/lib/serverActions/auth";
+import {store} from "next/dist/build/output/store";
 
 const AppLayout = async({children}: { children: React.ReactNode }) => {
-    const store = cookies()
-    if(!store.has(TOKENS_KEYS.access)) {
-        return redirect('/auth')
+    const config = await checkAuth()
+    console.log(config)
+    if(!config.currentUser.isAuthenticated) {
+        return redirect('/auth/onboard')
     }
     return (
-        <div className={'h-[calc(100dvh)] bg-content1'}>
+        <div className={'min-h-[calc(100dvh)] bg-gradient-with-image bg-cover bg-center'}>
+            {/*<div className={'flex overflow-hidden'}>*/}
             <AppNavbar/>
-            <div className={`h-[calc(100dvh-60px)] flex overflow-y-hidden bg-content1`}>
-                <div className={'hidden lg:flex md:flex'}>
-                    <SideBar/>
-                    <Divider orientation={'vertical'}/>
-                </div>
-                {/*<Divider orientation={'vertical'}/>*/}
-                <main className={'bg-content2 p-4 overflow-auto flex-1 flex flex-col gap-2'}>
+            {/*</div>*/}
+            <div className={`min-h-[calc(100dvh-42px)] w-full flex items-center justify-center overflow-y-hidden`}>
+                <main className={'max-w-[520px] w-full px-2 h-full overflow-auto'}>
                     {children}
                 </main>
             </div>

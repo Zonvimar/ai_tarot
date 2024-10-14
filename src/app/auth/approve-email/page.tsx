@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import {redirect} from "next/navigation";
-import {confirmReset} from "@/lib/serverActions/auth";
+import {approveEmail, confirmReset} from "@/lib/serverActions/auth";
 import {Link} from "@nextui-org/link";
 import {Image} from "@nextui-org/image";
 import FormWrapper from "@/components/shared/FormWrapper";
@@ -23,9 +23,9 @@ const Page: FC<Props> = async({searchParams}) => {
     const handleVerify = async (fd: FormData) => {
         'use server'
         console.log(fd.get('code'))
-        const res = await confirmReset(fd)
+        const res = await approveEmail(fd)
         if (res.status === 'ok') {
-            redirect('/')
+            redirect('/auth/onboard')
         }
         return res
     }

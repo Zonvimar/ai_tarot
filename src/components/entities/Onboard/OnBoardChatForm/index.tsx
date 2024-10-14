@@ -39,7 +39,7 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                 // label={'Name'}
                                 className={'text-xl'}
                                 placeholder={'Ask your question for free'}
-                                name={'name'}
+                                name={'question'}
                                 endContent={
                                     <Button
                                         type={'submit'}

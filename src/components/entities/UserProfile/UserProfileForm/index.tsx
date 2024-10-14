@@ -18,10 +18,12 @@ type Props = {
 const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
     const [value, setValue] = useState("");
     const [emailValue, setEmailValue] = useState("");
+    const [emailExists, setEmailExists] = useState(false);
     const [selectedGender, setSelectedGender] = useState("female");
     // const router = useRouter()
     const searchParams = useSearchParams();
     const addInfo = !!searchParams?.get('addInfo')
+    const question = searchParams?.get('onboardQuestion') ?? ''
 
     const handleGenderChange = (gender: string) => {
         setSelectedGender(gender);
@@ -51,10 +53,12 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                          </p>
                                      </div>
                                  }
+                                 setInvalid={setEmailExists}
                                  actionLabel={addInfo ? 'Complete & get tarot spread' : 'Create account'}
                     >
                         <input hidden name={'email'} value={emailValue}/>
                         <input hidden name={'password'} value={value}/>
+                        <input hidden name={'gender'} value={selectedGender}/>
                         <div className={'flex flex-col w-full gap-6 h-full '}>
                             <div className={'w-full flex flex-col gap-2 justify-center text-center items-center'}>
                                 {/*<div className={'w-full h-[64px]'}></div>*/}
@@ -77,7 +81,7 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                             label={'Name'}
                                             className={'text-xl'}
                                             placeholder={'Georgii'}
-                                            name={'name'}
+                                            name={'username'}
                                             // type={'email'}
                                         />
                                         <DatePicker
@@ -137,10 +141,12 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                             value={emailValue}
                                             onValueChange={setEmailValue}
                                             required
+                                            isInvalid={emailExists}
+                                            errorMessage={'Email already exists'}
                                             label={'Email'}
                                             className={'text-xl'}
                                             placeholder={'Email address'}
-                                            name={'email'}
+                                            // name={'email'}
                                             type={'email'}
                                         />
                                         <PasswordField
@@ -150,7 +156,7 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                             isInvalid={isInvalid}
                                             errorMessage={"The password must contain at least 8 characters"}
                                             size={'lg'}
-                                            name={'password'}
+                                            // name={'password'}
                                             label={'Password'}
                                             placeholder={'Password'}
                                             minLength={8}
