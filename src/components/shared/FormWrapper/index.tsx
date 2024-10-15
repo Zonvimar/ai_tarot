@@ -42,9 +42,9 @@ const FormWrapper: FC<CustomFormProps> = ({
             case 'ok':
                 const DEFAULT_MESSAGE
                     = 'Изменения сохранены'
-                if(!withoutPopover) {
-                    toast.success(message ?? DEFAULT_MESSAGE)
-                }
+                // if(!withoutPopover) {
+                //     toast.success(message ?? DEFAULT_MESSAGE)
+                // }
                 modalControl && modalControl(false)
                 clearAfterSubmit && formRef?.current?.reset()
                 break
