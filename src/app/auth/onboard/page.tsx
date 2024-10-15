@@ -1,4 +1,3 @@
-import {loginIntoAccount} from '@/lib/serverActions/auth'
 import React, {FC} from 'react'
 import {redirect} from "next/navigation";
 import OnBoardChatForm from "@/components/entities/Onboard/OnBoardChatForm";

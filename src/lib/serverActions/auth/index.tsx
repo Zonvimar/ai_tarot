@@ -1,9 +1,6 @@
 'use server'
 import fetchService from '@/configs/http-service/fetch-settings'
 import {ActionResponse} from '@/configs/http-service/fetch-settings/types'
-import {cookies} from "next/headers";
-import {TOKENS_KEYS} from "@/configs/http-service/constants/authTokens";
-import {Message} from "@/lib/types/chat.types";
 import { ConfigurationType } from '@/lib/types/config.types';
 
 
@@ -50,14 +47,6 @@ const loginIntoAccount = async (fd: FormData): Promise<ActionResponse> => {
             })
         })
         if (res.ok) {
-            // cookies().set(TOKENS_KEYS.access, res.data.token, {
-            //     priority: 'high',
-            //     sameSite: 'lax',
-            // })
-            // cookies().set(TOKENS_KEYS.refresh, res.data.token, {
-            //     priority: 'high',
-            //     sameSite: 'lax',
-            // })
             console.info('Login successful, tokens have been installed')
         } else {
             const message = res.data?.detail
@@ -82,17 +71,6 @@ const loginIntoAccount = async (fd: FormData): Promise<ActionResponse> => {
 }
 
 const registerAccount = async (fd: FormData): Promise<ActionResponse> => {
-    // console.log(JSON.stringify({
-    //     username: fd.get('username'),
-    //     email: fd.get('email'),
-    //     password: fd.get('password'),
-    //     dateOfBirth: fd.get('dateOfBirth'),
-    //     gender: fd.get('gender'),
-    // }))
-    // return {
-    //     status: 'ok',
-    //     message: ''
-    // }
     try {
         const response = await fetchService.post('api/account/register/', {
             body: JSON.stringify({
@@ -172,37 +150,10 @@ const resetPassword = async (fd: FormData): Promise<ActionResponse> => {
 }
 
 const confirmReset = async (fd: FormData): Promise<ActionResponse> => {
-    // try {
-    //     const response = await fetchService.post('authentication/reset_password/confirm/', {
-    //         body: JSON.stringify({
-    //             email: fd.get('email'),
-    //             code: fd.get('code'),
-    //             password: fd.get('password'),
-    //         })
-    //     })
-    //     if(!response.ok) {
-    //         const message = response.data.detail
-    //         throw new Error(message)
-    //     } else {
-            return {
-                status: 'ok',
-                message: 'Вы успешно сменили свой пароль'
-            }
-    //     }
-    //
-    // } catch (e) {
-    //     if(e instanceof Error) {
-    //         return {
-    //             status: 'error',
-    //             message: e.message
-    //         }
-    //     } else {
-    //         return {
-    //             status: 'error',
-    //             message: 'Не удалось сменить пароль'
-    //         }
-    //     }
-    // }
+    return {
+        status: 'ok',
+        message: 'Вы успешно сменили свой пароль'
+    }
 }
 
 const approveEmail = async (fd: FormData): Promise<ActionResponse> => {

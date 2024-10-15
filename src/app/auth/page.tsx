@@ -1,4 +1,4 @@
-import UserLoginForm from '@/components/entities/UserProfile/UserLoginForm'
+import UserLoginForm from '../../components/entities/Auth/UserLoginForm'
 import {loginIntoAccount} from '@/lib/serverActions/auth'
 import React, {FC} from 'react'
 import {redirect} from "next/navigation";

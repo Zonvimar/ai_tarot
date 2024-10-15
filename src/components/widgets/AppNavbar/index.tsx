@@ -1,4 +1,3 @@
-import {getUserInfo} from "@/lib/serverActions/user";
 import NavBar from "@/components/widgets/AppNavbar/NavBar";
 
 

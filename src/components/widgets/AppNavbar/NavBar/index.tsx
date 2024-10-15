@@ -1,11 +1,10 @@
 'use client'
-import NotificationWidget from '@/components/widgets/NotificationWidget'
-import ThemeSwitcher from '@/components/widgets/ThemeSwitcher'
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuToggle, NavbarMenuItem} from '@nextui-org/react'
+import {Navbar, NavbarContent, NavbarItem} from '@nextui-org/react'
 import {AlignJustify, X} from "lucide-react";
 import React, {useState} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
+
 const NavBar = () => {
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const pathname = usePathname();

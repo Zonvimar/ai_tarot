@@ -7,7 +7,6 @@ import {ActionResponse} from "@/configs/http-service/fetch-settings/types";
 import {Button, cn} from "@nextui-org/react";
 import {CircleHelp, Send} from "lucide-react";
 import ModalComponent from "@/components/shared/ModalComponent";
-import {ChevronCircleTopLinearIcon} from "@nextui-org/shared-icons";
 
 
 const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData) => Promise<ActionResponse>}) => {
@@ -63,7 +62,7 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                     Always online to help you find answers
                                 </div>
                                 <Image
-                                    src={'/img_5.png'}
+                                    src={'/onboard.png'}
                                     alt={'logo'}
                                     width={214}
                                     height={214}

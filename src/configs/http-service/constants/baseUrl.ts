@@ -1,4 +1,4 @@
-const DEV_BASE_URL = 'http://152.42.132.41:5000/' //TODO
+const DEV_BASE_URL = 'http://152.42.132.41:5000/'
 const PROD_BASE_URL = 'http://152.42.132.41:5000/'
 
 export const baseUrls = {

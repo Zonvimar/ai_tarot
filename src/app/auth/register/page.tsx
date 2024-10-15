@@ -1,11 +1,7 @@
-import UserProfileForm from '@/components/entities/UserProfile/UserProfileForm'
-import FormWrapper from '@/components/shared/FormWrapper'
-import {checkEmailExists, registerAccount, successResponse} from '@/lib/serverActions/auth'
-import Link from 'next/link'
+import UserProfileForm from '../../../components/entities/Auth/UserRegisterForm'
+import {checkEmailExists, registerAccount} from '@/lib/serverActions/auth'
 import React, {FC} from 'react'
 import {redirect} from "next/navigation";
-import {Image} from "@nextui-org/image";
-import SubmitButton from "@/components/shared/Buttons/SubmitButton";
 
 type Props = {
     searchParams: {
