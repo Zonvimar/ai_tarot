@@ -4,6 +4,7 @@ import {AlignJustify, X} from "lucide-react";
 import React, {useState} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
+import {Image} from "@nextui-org/image";
 
 const NavBar = () => {
     const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -15,7 +16,10 @@ const NavBar = () => {
     const getNavItem = () => {
         switch(pathname) {
             case '/':
-                return <p className={'text-sm sm:text-lg'}>100</p>
+                return <div className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
+                    <p className={'flex items-end justify-end'}>300</p>
+                    <Image src={'/oracle-icon.svg'} height={22} width={24}/>
+                </div>
             case '/auth/register':
             case '/auth/onboard':
             case '/auth/approve-email':
@@ -63,8 +67,8 @@ const NavBar = () => {
                         {getNavItem()}
                     </NavbarItem>
                     <NavbarItem>
-                        <a href="#" onClick={showSidebar}>
-                            <AlignJustify strokeWidth={1.5} className="text-[#9999A3] h-7 w-8"/>
+                        <a href="#" className={'flex items-center justify-center bg-[#454545] rounded-full h-9 w-9'} onClick={showSidebar}>
+                            <AlignJustify strokeWidth={1.5} className="text-[#9999A3] h-5 w-7"/>
                         </a>
                     </NavbarItem>
                 </NavbarContent>

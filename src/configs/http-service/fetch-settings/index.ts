@@ -4,7 +4,7 @@ import {FetchOptionsT, FetchServiceT} from '@/configs/http-service/fetch-setting
 
 const defaultHeaders: { [key: string]: string } = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    'Accept': '*/*',
 }
 
 
@@ -30,6 +30,7 @@ const returnErrorFetchData = async (response: Response) => {
         case 500:
             return {
                 ok: false,
+                headers: response.headers,
                 status: response.status,
                 data: {
                     detail: 'Внутренняя ошибка сервиса (500), обратитесь в поддержку',
@@ -38,6 +39,7 @@ const returnErrorFetchData = async (response: Response) => {
         case 404:
             return {
                 ok: false,
+                headers: response.headers,
                 status: response.status,
                 data: {
                     detail: 'Объект не существует или не найден (404), обратитесь в поддержку',
@@ -46,6 +48,7 @@ const returnErrorFetchData = async (response: Response) => {
         case 403:
             return {
                 ok: false,
+                headers: response.headers,
                 status: response.status,
                 data: {
                     detail: 'Доступ запрещен (403), обратитесь к администратору',
@@ -56,6 +59,7 @@ const returnErrorFetchData = async (response: Response) => {
             console.log('DEFAULT FETCH ERROR REDIRECT',data)
             return {
                 ok: false,
+                headers: response.headers,
                 status: response.status,
                 data: {
                     detail: data.detail ?? `Произошла ошибка при обработке запроса ${response.status}, обратитесь в поддержку`,
@@ -68,6 +72,7 @@ const returnFetchData = async (response: Response) => {
     console.log(data)
     return {
         status: response.status,
+        headers: response.headers,
         ok: true,
         data
     }
@@ -93,7 +98,7 @@ const retrieveFetchResponse = async (url: string, method: string, options?: Fetc
         method,
         ...options,
         headers: {
-            ...(token && {'Authorization': `Bearer ${token}`}),
+            ...(token && {'Cookie': `${token}`}),
             ...(options?.headers ? {...options?.headers} : {...defaultHeaders}),
         }
     })

@@ -21,7 +21,7 @@ const Page: FC<Props> = async({searchParams}) => {
         console.log(fd.get('code'))
         const res = await approveEmail(fd)
         if (res.status === 'ok') {
-            redirect('/auth/onboard')
+            redirect('/')
         }
         return res
     }

@@ -1,4 +1,7 @@
 import React, {FC} from 'react'
+import MainPageForm from "@/components/entities/Main/MainPageForm";
+import {loginIntoAccount} from "@/lib/serverActions/auth";
+import {redirect} from "next/navigation";
 
 type Props = {
     searchParams: {
@@ -11,10 +14,18 @@ type Props = {
 
 
 const Page: FC<Props> = async({searchParams}) => {
+    const handleAuth = async (fd: FormData) => {
+        'use server'
+        const res = await loginIntoAccount(fd)
+        if (res.status === 'ok') {
+            redirect('/')
+        }
+        return res
+    }
 
     return (
         <>
-            <h1>Main page</h1>
+            <MainPageForm handleAuth={handleAuth}/>
         </>
     )
 }

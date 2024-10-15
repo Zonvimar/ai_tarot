@@ -2,6 +2,8 @@
 import fetchService from '@/configs/http-service/fetch-settings'
 import {ActionResponse} from '@/configs/http-service/fetch-settings/types'
 import { ConfigurationType } from '@/lib/types/config.types';
+import {TOKENS_KEYS} from "@/configs/http-service/constants/authTokens";
+import {cookies} from "next/headers";
 
 
 
@@ -46,7 +48,12 @@ const loginIntoAccount = async (fd: FormData): Promise<ActionResponse> => {
                 password: fd.get('password')
             })
         })
+
         if (res.ok) {
+            cookies().set(TOKENS_KEYS.access, res.headers.get('Set-Cookie'), {
+                priority: 'high',
+                sameSite: 'lax',
+            })
             console.info('Login successful, tokens have been installed')
         } else {
             const message = res.data?.detail
@@ -72,7 +79,7 @@ const loginIntoAccount = async (fd: FormData): Promise<ActionResponse> => {
 
 const registerAccount = async (fd: FormData): Promise<ActionResponse> => {
     try {
-        const response = await fetchService.post('api/account/register/', {
+        const res = await fetchService.post('api/account/register/', {
             body: JSON.stringify({
                 username: fd.get('username'),
                 email: fd.get('email'),
@@ -81,20 +88,16 @@ const registerAccount = async (fd: FormData): Promise<ActionResponse> => {
                 gender: fd.get('gender'),
             }),
         })
-
-        console.log('RESPONSE')
-        console.log(response)
-
-        if(!response.ok) {
-            const message = response.data.detail
-            throw new Error(message)
+        if (res.ok) {
+            cookies().set(TOKENS_KEYS.access, res.headers.get('Set-Cookie'), {
+                priority: 'high',
+                sameSite: 'lax',
+            })
+            console.info('Login successful, tokens have been installed')
         } else {
-            return {
-                status: 'ok',
-                message: 'Вы успешно зарегестрировались'
-            }
+            const message = res.data?.detail
+            throw new Error(message)
         }
-
     } catch (e) {
         if(e instanceof Error) {
             return {
@@ -107,6 +110,10 @@ const registerAccount = async (fd: FormData): Promise<ActionResponse> => {
                 message: 'Не удалось создать аккаунт'
             }
         }
+    }
+    return {
+        status: 'ok',
+        message: 'Htubcnhfwbz успешна'
     }
 }
 

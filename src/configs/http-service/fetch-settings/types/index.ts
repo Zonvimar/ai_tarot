@@ -9,11 +9,13 @@ export type FetchOptionsT = {
 
 type SuccessFetchResponse<ReturnType = unknown> = {
     status: number,
+    headers: Headers,
     ok: true,
     data: ReturnType
 }
 type ErrorFetchResponse = {
     status: number,
+    headers: Headers,
     ok: false,
     data: {detail: string}
 }

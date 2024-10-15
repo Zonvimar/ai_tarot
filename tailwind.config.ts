@@ -12,6 +12,7 @@ const config: Config = {
         extend: {
             backgroundImage: {
                 'gradient-with-image': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/Background.png')",
+                'gradient-with-image-chat': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/mainBackground.png')",
             },
             animation: {
                 scaleUpDown: 'scaleUpDown 2s ease-in-out infinite',
