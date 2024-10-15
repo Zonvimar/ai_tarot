@@ -1,6 +1,6 @@
 'use client'
 import TextField from '@/components/shared/Inputs/TextField'
-import React, {FC, useMemo, useState} from 'react'
+import React, {FC, useEffect, useMemo, useState} from 'react'
 import PasswordField from "@/components/shared/Inputs/PasswordField";
 import {DatePicker, DateValue} from "@nextui-org/react";
 import {Image} from "@nextui-org/image";
@@ -28,6 +28,10 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
     const searchParams = useSearchParams();
     const addInfo = !!searchParams?.get('addInfo')
     const question = searchParams?.get('onboardQuestion') ?? ''
+
+    useEffect(() => {
+        setEmailExists(false)
+    }, [emailValue]);
 
     const handleGenderChange = (gender: string) => {
         setSelectedGender(gender);
