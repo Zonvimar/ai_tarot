@@ -35,7 +35,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Navbar className={'z-50 bg-opacity-0'} isBlurred={false} height={'36px'} maxWidth={'full'} classNames={{
+            <Navbar className={'z-50 bg-opacity-0'} isBlurred={false} height={'58px'} maxWidth={'full'} classNames={{
                 item: [
                     // "flex",
                     // "relative",
@@ -52,7 +52,7 @@ const NavBar = () => {
                     // "data-[active=true]:after:bg-content1",
                 ],
                 wrapper: [
-                    'px-2 mt-1.5'
+                    'px-2'
                 ]
             }}>
                 <NavbarContent justify="start">

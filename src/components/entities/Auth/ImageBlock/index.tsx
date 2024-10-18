@@ -9,7 +9,7 @@ type Props = {
 const ImageBlock: FC<Props> = ({children, imageSrc}) => {
     return (
         <div className={'w-full flex flex-col gap-6 justify-center items-center text-center'}>
-            <div className={'flex-col gap-2 hidden sm:flex'}>
+            <div className={'z-10 flex-col gap-2 hidden sm:flex'}>
                 <p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>
                 <div
                     className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs sm:text-medium  font-normal'}>

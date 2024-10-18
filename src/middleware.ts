@@ -9,20 +9,7 @@ export async function middleware(req: NextRequest) {
     } = req.nextUrl
     const res = NextResponse.next({request: {...req}})
 
-    const refresh = req.cookies.get(TOKENS_KEYS.refresh)?.value ?? null
-    const access = req.cookies.get(TOKENS_KEYS.access)?.value ?? null
-
-    const noRefresh = !!refresh
-    const noAccess = !!access
-    const noTokens = noRefresh && noAccess
-
-    const isAuthPage = pathname.includes('/auth')
-
     console.log('-------------------- REQUEST FROM, ', pathname)
-
-    // if(!isAuthPage && noAccess) {
-    //
-    // }
 }
 
 export const config = {

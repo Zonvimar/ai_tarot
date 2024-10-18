@@ -10,9 +10,18 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            boxShadow: {
+                'spread-card': '0px 2px 14px 0px rgba(34, 135, 157, 0.65)',
+            },
+            backdropBlur: {
+                'spread-card': '26px',
+            },
             backgroundImage: {
                 'gradient-with-image': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/Background.png')",
                 'gradient-with-image-chat': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/mainBackground.png')",
+                'gradient-main': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%)",
+                'gradient-main-chat': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%), url('/mainBackground.png')",
+                'gradient-main-right': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%), url('/chatBackground.png')",
             },
             animation: {
                 scaleUpDown: 'scaleUpDown 2s ease-in-out infinite',

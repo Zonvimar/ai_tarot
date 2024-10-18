@@ -10,12 +10,12 @@ const AppLayout = async({children}: { children: React.ReactNode }) => {
         return redirect('/auth/onboard')
     }
     return (
-        <div className={'min-h-[calc(100dvh)] bg-gradient-with-image-chat bg-cover bg-center'}>
+        <div className={'min-h-[calc(100dvh)] bg-gradient-main'}>
             {/*<div className={'flex overflow-hidden'}>*/}
-            <AppNavbar/>
+            {/*<AppNavbar/>*/}
             {/*</div>*/}
-            <div className={`min-h-[calc(100dvh-42px)] w-full flex items-center justify-center overflow-y-hidden`}>
-                <main className={'max-w-[520px] w-full px-2 h-full overflow-auto'}>
+            <div className={`min-h-[calc(100dvh)] bg-center w-full flex items-center justify-center overflow-y-hidden`}>
+                <main className={'max-w-[520px] sm:max-w-full sm:items-start w-full h-full flex overflow-auto'}>
                     {children}
                 </main>
             </div>

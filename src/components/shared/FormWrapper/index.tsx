@@ -10,6 +10,7 @@ type CustomFormProps = {
     modalControl?: React.Dispatch<React.SetStateAction<boolean>>,
     setInvalid?: React.Dispatch<React.SetStateAction<boolean>>,
     readonly actionLabel?: string,
+    calcHeight?: string,
     withOutDefaultButton?: boolean,
     disablePaddings?: boolean,
     withoutPopover?: boolean,
@@ -30,6 +31,7 @@ const FormWrapper: FC<CustomFormProps> = ({
                                               setInvalid,
                                               infoUnderButton,
                                               customButton,
+                                              calcHeight
                                           }) => {
 
     const formRef = useRef<HTMLFormElement>(null)
@@ -67,7 +69,7 @@ const FormWrapper: FC<CustomFormProps> = ({
             onClick={e => e.stopPropagation()}
             ref={formRef}
         >
-            <div className={`flex-grow overflow-y-auto ${infoUnderButton ? 'max-h-[calc(100dvh-152px)] sm:max-h-[calc(100dvh-162px)]' : 'max-h-[calc(100dvh-132px)] sm:max-h-[calc(100dvh-157px)]'}`}>
+            <div className={`flex-grow overflow-y-auto ${calcHeight ? calcHeight : infoUnderButton ? 'max-h-[calc(100dvh-152px)] sm:max-h-[calc(100dvh-162px)]' : 'max-h-[calc(100dvh-132px)] sm:max-h-[calc(100dvh-157px)]'}`}>
                 {children}
             </div>
             {
