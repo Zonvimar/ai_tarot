@@ -12,6 +12,7 @@ import {Image} from "@nextui-org/image";
 import FormWrapper from "@/components/shared/FormWrapper";
 import {usePathname} from "next/navigation";
 import {Input} from "@nextui-org/input";
+import MessageInput from "@/components/shared/Inputs/MessageInput";
 
 type Props = {
     olderSpreads: Spread[],
@@ -64,49 +65,11 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                     action={handleAskQuestion}
                     withOutDefaultButton calcHeight={'min-h-[calc(100dvh-140px)]'}
                     customButton={
-                        <div className={'flex h-full flex-col gap-2'}>
-                            <Input
-                                required
-                                placeholder={'Ask something'}
-                                name={'question'}
-                                endContent={
-                                    <Button
-                                        type={'submit'}
-                                        isIconOnly
-                                        radius={'full'}
-                                        className={'bg-[#22879D] w-full max-w-[62px] h-[62px] shadow-[0px_4px_14px_0px_rgba(34,135,157,1)]'}
-                                    >
-                                        <Image src={'/ic_send.svg'} width={24} height={24}/>
-                                    </Button>
-                                }
-                                autoComplete="off"
-                                variant={'faded'}
-                                labelPlacement={'outside'}
-                                classNames={{
-                                    inputWrapper: 'border-[1px] h-[78px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
-                                    input: [
-                                        'h-full',
-                                        'placeholder:text-[#E9E9E9]',
-                                        'text-medium sm:text-lg',
-                                    ],
-                                    label: 'text-sm sm:text-xl font-semibold',
-                                }}/>
-                            {/*<TextField*/}
-                            {/*    required*/}
-                            {/*    placeholder={'Ask something'}*/}
-                            {/*    name={'question'}*/}
-                            {/*    endContent={*/}
-                            {/*        <Button*/}
-                            {/*            type={'submit'}*/}
-                            {/*            isIconOnly*/}
-                            {/*            radius={'full'}*/}
-                            {/*            className={'bg-[#22879D]'}*/}
-                            {/*        >*/}
-                            {/*            <Send className={'text-white'}/>*/}
-                            {/*        </Button>*/}
-                            {/*    }*/}
-                            {/*/>*/}
-                        </div>
+                        <MessageInput
+                            required
+                            placeholder={'Ask something'}
+                            name={'question'}
+                        />
                     }
                     actionLabel={'Send message'}
                 >

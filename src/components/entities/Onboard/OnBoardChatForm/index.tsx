@@ -10,6 +10,7 @@ import {redirect} from "next/navigation";
 import {Input} from "@nextui-org/input";
 import ImageBlock from "@/components/entities/Auth/ImageBlock";
 import {useRouter} from "next/navigation";
+import MessageInput from "@/components/shared/Inputs/MessageInput";
 
 
 const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData) => Promise<ActionResponse>}) => {
@@ -32,37 +33,13 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
             <div className={'grid place-items-start h-full'}>
                 <FormWrapper
                     action={handleAskQuestion}
-                    withOutDefaultButton calcHeight={'max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-210px)]'}
+                    withOutDefaultButton calcHeight={'max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-190px)]'}
                     customButton={
-                        // <div className={''}>
-                            <Input
+                            <MessageInput
                                 required
                                 placeholder={'Ask your question for free'}
                                 name={'question'}
-                                endContent={
-                                    <Button
-                                        type={'submit'}
-                                        isIconOnly
-                                        radius={'full'}
-                                        className={'bg-[#22879D] w-full max-w-[44px] sm:max-w-[62px] h-[44px] sm:h-[62px] shadow-[0px_4px_14px_0px_rgba(34,135,157,1)]'}
-                                    >
-                                        <Image src={'/ic_send.svg'} width={24} height={24}/>
-                                    </Button>
-                                }
-                                autoComplete="off"
-                                variant={'faded'}
-                                radius={'lg'}
-                                labelPlacement={'outside'}
-                                classNames={{
-                                    inputWrapper: 'border-[1px] h-[60px] sm:h-[78px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
-                                    input: [
-                                        'h-full',
-                                        'placeholder:text-[#E9E9E9]',
-                                        'text-medium sm:text-lg',
-                                    ],
-                                    label: 'text-sm sm:text-xl font-semibold',
-                                }}/>
-                        // </div>
+                            />
                     }
                     actionLabel={'Send message'}
                 >
