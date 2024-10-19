@@ -31,7 +31,7 @@ const UserLoginForm: FC<Props> = ({handleAuth}) => {
                              }
                              actionLabel={'Log in'}>
                     <input hidden value={'login'} name={'auth'}/>
-                    <div className={'flex flex-col w-full gap-6 h-full '}>
+                    <div className={'flex flex-col w-full gap-3 h-full '}>
                         <ImageBlock imageSrc={'/authImage.png'}>
                             <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
                                 Nice to meet you 👋

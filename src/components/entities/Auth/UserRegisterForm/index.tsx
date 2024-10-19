@@ -67,7 +67,7 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                         <input hidden name={'email'} value={emailValue}/>
                         <input hidden name={'password'} value={value}/>
                         <input hidden name={'gender'} value={selectedGender}/>
-                        <div className={'flex flex-col w-full gap-6 h-full '}>
+                        <div className={'flex flex-col w-full gap-3 h-full '}>
                             <ImageBlock imageSrc={'/registerImage.png'}>
                                 <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
                                     {addInfo ?
@@ -77,7 +77,7 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
                                     }
                                 </h1>
                             </ImageBlock>
-                            <div className={'flex flex-col gap-2'}>
+                            <div className={'flex flex-col'}>
                                 {addInfo ?
                                     <>
                                         <TextField

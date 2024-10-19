@@ -2,13 +2,13 @@ import {Image} from "@nextui-org/image";
 import React, {FC} from "react";
 
 type Props = {
-    children: React.ReactNode,
+    children?: React.ReactNode,
     imageSrc: string,
 }
 
 const ImageBlock: FC<Props> = ({children, imageSrc}) => {
     return (
-        <div className={'w-full flex flex-col gap-6 justify-center items-center text-center'}>
+        <div className={'w-full flex flex-col gap-4 justify-center items-center text-center'}>
             <div className={'z-10 flex-col gap-2 hidden sm:flex'}>
                 <p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>
                 <div
@@ -20,8 +20,8 @@ const ImageBlock: FC<Props> = ({children, imageSrc}) => {
             <Image
                 src={imageSrc}
                 alt={'logo'}
-                width={325}
-                height={325}
+                width={280}
+                height={280}
                 // removeWrapper
                 classNames={{
                     img: [
@@ -34,17 +34,12 @@ const ImageBlock: FC<Props> = ({children, imageSrc}) => {
 
                 style={{
                     width: '50vw',
-                    maxWidth: '325px',
+                    maxWidth: '280px',
                     height: 'auto',
                     transition: 'width 0.5s ease-in-out',
                 }}
             />
-            <div className={'flex flex-col gap-2'}>
-                {children}
-                {/*<h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>*/}
-                {/*    Nice to meet you 👋*/}
-                {/*</h1>*/}
-            </div>
+            {children && <div className={'w-full flex flex-col gap-2'}>{children}</div>}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 'use client'
-import {Navbar, NavbarContent, NavbarItem} from '@nextui-org/react'
+import {Button, Navbar, NavbarContent, NavbarItem} from '@nextui-org/react'
 import {AlignJustify, X} from "lucide-react";
 import React, {useState} from "react";
 import {usePathname} from "next/navigation";
@@ -21,11 +21,12 @@ const NavBar = () => {
                     <Image src={'/oracle-icon.svg'} height={22} width={24}/>
                 </div>
             case '/auth/register':
-            case '/auth/onboard':
             case '/auth/approve-email':
             case '/auth/reset-password':
             case '/auth/new-password':
                 return <Link href={'/auth'} className={'font-bold text-[#27ACC9] text-sm sm:text-lg'}>Log in</Link>
+            case '/auth/onboard':
+                return <Link href={'/auth'} className={'font-bold text-[#27ACC9] hidden sm:flex text-sm sm:text-lg'}>Log in</Link>
             case '/auth':
                 return <Link href={'/auth/register'} className={'font-bold text-[#27ACC9] text-sm sm:text-lg'}>Sign up</Link>
             default:
@@ -35,7 +36,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Navbar className={'z-50 bg-opacity-0'} isBlurred={false} height={'58px'} maxWidth={'full'} classNames={{
+            <Navbar className={'z-50 bg-opacity-0 '} isBlurred={false} height={'58px'} maxWidth={'full'} classNames={{
                 item: [
                     // "flex",
                     // "relative",
@@ -57,19 +58,26 @@ const NavBar = () => {
             }}>
                 <NavbarContent justify="start">
                 </NavbarContent>
-                <NavbarContent className={`${pathname !== '/auth/onboard' ? 'hidden' : ''}`} justify="center">
+                <NavbarContent className={`${pathname !== '/auth/onboard' ? 'hidden' : 'flex sm:hidden'}`} justify="center">
                     <NavbarItem>
-                        <p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>
+                        <p className={'text-xl sm:text-3xl text-center font-semibold'}>Aita, ai tarologist</p>
+                        <div
+                            className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs sm:text-medium  font-normal'}>
+                            <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
+                            Always online to help you find answers
+                        </div>
                     </NavbarItem>
                 </NavbarContent>
-                <NavbarContent justify="end">
+                <NavbarContent justify="end" className={'lg:pr-7 lg:pt-6'}>
                     <NavbarItem>
                         {getNavItem()}
                     </NavbarItem>
                     <NavbarItem>
-                        <a href="#" className={'flex items-center justify-center bg-[#454545] rounded-full h-9 w-9'} onClick={showSidebar}>
-                            <AlignJustify strokeWidth={1.5} className="text-[#9999A3] h-5 w-7"/>
-                        </a>
+                        <Button isIconOnly
+                                className={'flex items-center justify-center bg-[rgba(69,69,69,0.5)] backdrop-blur-2xl rounded-full h-10 w-10'}
+                                onClick={showSidebar}>
+                            <AlignJustify strokeWidth={1.5} className="text-white h-5 w-7"/>
+                        </Button>
                     </NavbarItem>
                 </NavbarContent>
             </Navbar>
@@ -81,14 +89,14 @@ const NavBar = () => {
             )}
 
             <ul
-                className={`fixed top-0 right-0 z-50 px-4 h-screen w-72 bg-[#343434] flex flex-col gap-4 items-start transition-transform transform ${
+                className={`fixed top-0 right-0 z-50 px-4 h-screen w-72 lg:w-[460px] bg-[#161E2C] flex flex-col gap-4 items-start transition-transform transform ${
                     sidebarVisible ? 'translate-x-0' : 'translate-x-full'
                 }`}>
-                <li className="w-full pt-3 justify-end items-end">
-                    <a href="#" onClick={hideSidebar}
-                       className="pr-2 w-full flex justify-end items-center">
+                <li className="w-full flex lg:pt-7 pt-2  lg:pr-4 justify-end items-end">
+                    <Button isIconOnly className={'h-10 w-10 flex justify-center bg-[#161E2C] items-center'}
+                            onClick={hideSidebar}>
                         <X className="text-white h-8 w-8"/>
-                    </a>
+                    </Button>
                 </li>
                 <li onClick={hideSidebar} className="w-full font-semibold text-xl text-[#27ACC9]">
                     <Link href={'/auth'}>

@@ -6,11 +6,9 @@ import ImageBlock from "@/components/entities/Auth/ImageBlock";
 import SubmitButton from "@/components/shared/Buttons/SubmitButton";
 import {Spread} from "@/lib/types/spread.types";
 import SpreadCard from "@/components/entities/Main/SpreadCard";
-import TextField from "@/components/shared/Inputs/TextField";
-import {Button, cn} from "@nextui-org/react";
-import {AlignJustify, CircleHelp, Send, X} from "lucide-react";
+import {Button} from "@nextui-org/react";
+import {AlignJustify, X} from "lucide-react";
 import {Image} from "@nextui-org/image";
-import ModalComponent from "@/components/shared/ModalComponent";
 import FormWrapper from "@/components/shared/FormWrapper";
 import {usePathname} from "next/navigation";
 import {Input} from "@nextui-org/input";
@@ -22,23 +20,11 @@ type Props = {
 
 
 const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
-    const [showFirstMessage, setShowFirstMessage] = useState(false)
-    const [showSecondMessage, setShowSecondMessage] = useState(false)
-    const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false)
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const pathname = usePathname();
     const showSidebar = () => setSidebarVisible(true);
     const hideSidebar = () => setSidebarVisible(false);
 
-
-    useEffect(() => {
-        setTimeout(() => {
-            setShowFirstMessage(true)
-        }, 2000);
-        setTimeout(() => {
-            setShowSecondMessage(true)
-        }, 5000);
-    }, []);
 
 
     return (
@@ -97,14 +83,14 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                                 variant={'faded'}
                                 labelPlacement={'outside'}
                                 classNames={{
-                                inputWrapper: 'border-[1px] h-[78px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
-                                input: [
-                                    'h-full',
-                                    'placeholder:text-[#E9E9E9]',
-                                    'text-medium sm:text-lg',
-                                ],
-                                label: 'text-sm sm:text-xl font-semibold',
-                            }}/>
+                                    inputWrapper: 'border-[1px] h-[78px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
+                                    input: [
+                                        'h-full',
+                                        'placeholder:text-[#E9E9E9]',
+                                        'text-medium sm:text-lg',
+                                    ],
+                                    label: 'text-sm sm:text-xl font-semibold',
+                                }}/>
                             {/*<TextField*/}
                             {/*    required*/}
                             {/*    placeholder={'Ask something'}*/}
@@ -127,26 +113,26 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                     <div className={`flex h-full justify-center gap-2 sm:w-[580px] w-full`}>
                         {/*<div*/}
                         {/*    className={`flex-grow overflow-y-auto`}>*/}
-                            <div className={'flex flex-col w-full items-center gap-4 h-full px-4'}>
-                                <div className={'z-10 gap-2 flex justify-between w-full pt-1'}>
-                                    {/*<p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>*/}
+                        <div className={'flex flex-col w-full items-center gap-4 h-full px-4'}>
+                            <div className={'z-10 gap-2 flex justify-between w-full pt-1'}>
+                                {/*<p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>*/}
+                                <div
+                                    className={'w-full flex gap-1 items-center justify-start text-xl sm:text-2xl font-semibold'}>
+                                    Chat with Aita
+                                    <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
+                                </div>
+                                <div className='w-full flex gap-3 items-center justify-end'>
+                                    <Link href={'#'}
+                                          className={'text-lg font-semibold w-fit text-[#27ACC9] hover:underline text-center'}>
+                                        Add Oracles
+                                    </Link>
                                     <div
-                                        className={'w-full flex gap-1 items-center justify-start text-xl sm:text-2xl font-semibold'}>
-                                        Chat with Aita
-                                        <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
-                                    </div>
-                                    <div className='w-full flex gap-3 items-center justify-end'>
-                                        <Link href={'#'}
-                                              className={'text-lg font-semibold w-fit text-[#27ACC9] hover:underline text-center'}>
-                                            Add Oracles
-                                        </Link>
-                                        <div
-                                            className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
-                                            <p className={'flex items-end justify-end'}>300</p>
-                                            <Image src={'/oracle-icon.svg'} height={22} width={24}/>
-                                        </div>
+                                        className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
+                                        <p className={'flex items-end justify-end'}>300</p>
+                                        <Image src={'/oracle-icon.svg'} height={22} width={24}/>
                                     </div>
                                 </div>
+                            </div>
                             {/*</div>*/}
 
                         </div>
@@ -158,7 +144,7 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                 className={"flex relative justify-center items-center bg-gradient-main-right bg-no-repeat bg-cover bg-top min-h-[calc(100dvh)] h-full w-full"}>
                 <div className={'absolute right-7 top-8'}>
                     <Button isIconOnly
-                            className={'flex items-center justify-center bg-[rgb(69,69,69)] rounded-full h-10 w-10'}
+                            className={'flex items-center justify-center bg-[rgba(69,69,69,0.5)] backdrop-blur-3xl rounded-full h-10 w-10'}
                             onClick={showSidebar}>
                         <AlignJustify strokeWidth={1.5} className="text-white h-5 w-7"/>
                     </Button>
@@ -174,11 +160,11 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
             )}
 
             <ul
-                className={`fixed top-0 right-0 z-50 px-4 h-screen w-[460px] bg-[#343434] flex flex-col gap-4 items-start transition-transform transform ${
+                className={`fixed top-0 right-0 z-50 px-4 h-screen w-[460px] bg-[#161E2C] flex flex-col gap-4 items-start transition-transform transform ${
                     sidebarVisible ? 'translate-x-0' : 'translate-x-full'
                 }`}>
                 <li className="w-full flex pt-7 pr-4 justify-end items-end">
-                    <Button isIconOnly className={'h-10 w-10 flex justify-center bg-[#343434] items-center'}
+                    <Button isIconOnly className={'h-10 w-10 flex justify-center bg-[#161E2C] items-center'}
                             onClick={hideSidebar}>
                         <X className="text-white h-8 w-8"/>
                     </Button>

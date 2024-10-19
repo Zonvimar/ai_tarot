@@ -1,5 +1,4 @@
 'use client'
-import TextField from '@/components/shared/Inputs/TextField'
 import React, {useEffect, useState} from 'react'
 import {Image} from "@nextui-org/image";
 import FormWrapper from "@/components/shared/FormWrapper";
@@ -7,13 +6,17 @@ import {ActionResponse} from "@/configs/http-service/fetch-settings/types";
 import {Button, cn} from "@nextui-org/react";
 import {CircleHelp, Send} from "lucide-react";
 import ModalComponent from "@/components/shared/ModalComponent";
+import {redirect} from "next/navigation";
+import {Input} from "@nextui-org/input";
+import ImageBlock from "@/components/entities/Auth/ImageBlock";
+import {useRouter} from "next/navigation";
 
 
 const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData) => Promise<ActionResponse>}) => {
     const [showFirstMessage, setShowFirstMessage] = useState(false)
     const [showSecondMessage, setShowSecondMessage] = useState(false)
     const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false)
-
+    const router = useRouter();
     useEffect(() => {
         setTimeout(() => {
             setShowFirstMessage(true)
@@ -29,14 +32,11 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
             <div className={'grid place-items-start h-full'}>
                 <FormWrapper
                     action={handleAskQuestion}
-                    withOutDefaultButton
+                    withOutDefaultButton calcHeight={'max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-210px)]'}
                     customButton={
-                        <div className={'flex flex-col gap-2'}>
-                            <TextField
-                                size={'lg'}
+                        // <div className={''}>
+                            <Input
                                 required
-                                // label={'Name'}
-                                className={'text-xl'}
                                 placeholder={'Ask your question for free'}
                                 name={'question'}
                                 endContent={
@@ -44,40 +44,33 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                         type={'submit'}
                                         isIconOnly
                                         radius={'full'}
-                                        className={'bg-[#22879D]'}
+                                        className={'bg-[#22879D] w-full max-w-[44px] sm:max-w-[62px] h-[44px] sm:h-[62px] shadow-[0px_4px_14px_0px_rgba(34,135,157,1)]'}
                                     >
-                                        <Send className={'text-white'}/>
+                                        <Image src={'/ic_send.svg'} width={24} height={24}/>
                                     </Button>
                                 }
-                            />
-                        </div>
+                                autoComplete="off"
+                                variant={'faded'}
+                                radius={'lg'}
+                                labelPlacement={'outside'}
+                                classNames={{
+                                    inputWrapper: 'border-[1px] h-[60px] sm:h-[78px] border-gray-700 focus:ring-indigo-500 focus:border-indigo-500',
+                                    input: [
+                                        'h-full',
+                                        'placeholder:text-[#E9E9E9]',
+                                        'text-medium sm:text-lg',
+                                    ],
+                                    label: 'text-sm sm:text-xl font-semibold',
+                                }}/>
+                        // </div>
                     }
                     actionLabel={'Send message'}
                 >
                     <div className={'flex flex-col w-full gap-6 h-full '}>
                         <div className={'w-full flex flex-col justify-center text-center'}>
-                            <div className={'w-full flex flex-col gap-5 justify-center items-center text-center'}>
-                                <div className={'w-full flex gap-1 text-[#BEBEBE] items-center justify-center text-center text-xs sm:text-medium  font-normal'}>
-                                    <div className={'bg-[#14B411] rounded-full w-2 h-2'}></div>
-                                    Always online to help you find answers
-                                </div>
-                                <Image
-                                    src={'/onboard.png'}
-                                    alt={'logo'}
-                                    width={214}
-                                    height={214}
-                                    // removeWrapper
-                                    classNames={{
-                                        img: [
-                                            'backdrop-blur-xs',
-                                        ],
-                                        wrapper: [
-                                            'rounded-full shadow-[#22879D] shadow-[0_0_25px_1px_rgba(0,0,0,0.3)] bg-opacity-55 bg-[#22879D]'
-                                        ]
-                                    }}
-                                />
-                            </div>
-                            <div className={`${showSecondMessage ? 'hidden' : ''} flex gap-2 text-center items-center justify-center w-full pb-2 pt-3`}>
+                            <ImageBlock imageSrc={'/onboard.png'}/>
+                            <div
+                                className={`${showSecondMessage ? 'hidden' : ''} flex gap-2 text-center items-center justify-center w-full pb-2 pt-3`}>
                                 <div className="flex space-x-1 justify-center items-center">
                                     <div
                                         className="w-1.5 h-1.5 bg-[#BEBEBE] animate-scaleUpDown rounded-full"></div>
@@ -157,7 +150,7 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                         <Button size={'lg'}
                                                 className={cn(`flex w-full items-center gap-2 sticky bg-[#27ACC9] h-[60px] font-semibold text-xl rounded-[60px]`)}
                                                 type={'button'}
-                                                onClick={() => setHowItWorksModalOpen(false)}
+                                                onClick={() => router.replace('/auth/register')}
                                         >
                                             Ask question for free
                                         </Button>

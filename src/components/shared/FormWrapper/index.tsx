@@ -65,11 +65,11 @@ const FormWrapper: FC<CustomFormProps> = ({
     return (
         <form
             action={handleSubmit}
-            className={`flex flex-col min-h-[calc(100dvh-50px)] h-full justify-center gap-2 w-full`}
+            className={`flex flex-col min-h-[calc(100dvh-58px)] h-full justify-center gap-2 w-full`}
             onClick={e => e.stopPropagation()}
             ref={formRef}
         >
-            <div className={`flex-grow overflow-y-auto ${calcHeight ? calcHeight : infoUnderButton ? 'max-h-[calc(100dvh-152px)] sm:max-h-[calc(100dvh-162px)]' : 'max-h-[calc(100dvh-132px)] sm:max-h-[calc(100dvh-157px)]'}`}>
+            <div className={`flex-grow overflow-y-auto ${calcHeight ? calcHeight : infoUnderButton ? 'max-h-[calc(100dvh-172px)] sm:max-h-[calc(100dvh-172px)]' : 'max-h-[calc(100dvh-132px)] sm:max-h-[calc(100dvh-157px)]'}`}>
                 {children}
             </div>
             {
