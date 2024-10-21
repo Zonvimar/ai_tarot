@@ -6,7 +6,7 @@ import SubmitButton from "@/components/shared/Buttons/SubmitButton";
 
 type CustomFormProps = {
     children: React.ReactNode
-    action: (fd: FormData) => Promise<ActionResponse>,
+    action: (fd: FormData) => Promise<any>,
     modalControl?: React.Dispatch<React.SetStateAction<boolean>>,
     setInvalid?: React.Dispatch<React.SetStateAction<boolean>>,
     readonly actionLabel?: string,
@@ -39,24 +39,14 @@ const FormWrapper: FC<CustomFormProps> = ({
     const handleSubmit = async (fd: FormData) => {
         const actionResponse = await action(fd)
         console.log('FORM SUBMISSION RESULTS:', actionResponse)
-        const {status, message} = actionResponse !== undefined ? actionResponse : {status: 'ok', message: ''}
+        const {status} = actionResponse !== undefined ? actionResponse : {status: 'ok'}
         switch (status) {
             case 'ok':
-                const DEFAULT_MESSAGE
-                    = 'Изменения сохранены'
-                // if(!withoutPopover) {
-                //     toast.success(message ?? DEFAULT_MESSAGE)
-                // }
                 modalControl && modalControl(false)
                 clearAfterSubmit && formRef?.current?.reset()
                 break
             case 'error':
-                const DEFAULT_ERROR_MESSAGE
-                    = 'Что-то пошло не так, попробуйте еще раз, либо обратитесь в поддержку'
-                // if(!withoutPopover) {
-                //     toast.error(message ?? DEFAULT_ERROR_MESSAGE)
-                    setInvalid && setInvalid(true)
-                // }
+                setInvalid && setInvalid(true)
                 break
         }
         return

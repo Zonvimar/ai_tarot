@@ -24,7 +24,7 @@ const MessageInput: FC<MessageInputProps> = ({
                     type={'submit'}
                     isIconOnly
                     // radius={'full'}
-                    className={'bg-[#22879D] w-full rounded-full max-w-[44px] sm:max-w-[62px] h-[44px] sm:h-[62px] shadow-[0px_4px_14px_0px_rgba(34,135,157,1)]'}
+                    className={'bg-[#22879D] w-full rounded-full max-w-[44px] sm:max-w-[62px] h-[44px] sm:h-[62px] shadow-button'}
                 >
                     <Image src={'/ic_send.svg'} radius={'none'} width={20} height={20}/>
                 </Button>

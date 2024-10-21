@@ -21,8 +21,8 @@ const SubmitButton: React.FC<SubmitBtn> = ({
 
     return (
         <Button disabled={props.disabled || pending} size={'lg'} color={destructive ? 'danger' : 'primary'}
-                className={cn(`flex items-center gap-2 sticky shadow-md shadow-[#22879D] bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`, props.className)}
-                type={'submit'} variant={'shadow'}
+                className={cn(`flex items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`, props.className)}
+                type={'submit'}
         >
             {pending && <ChevronCircleTopLinearIcon className={'animate-spin'}/>}
             {label}

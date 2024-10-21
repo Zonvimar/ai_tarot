@@ -12,13 +12,10 @@ const getAuthToken: (source: 'client' | 'server') => Promise<string | null> = as
     switch (source) {
         case 'client':
             const {getCookie} = await import('cookies-next')
-            return getCookie(TOKENS_KEYS.access)
-                ?? getCookie(TOKENS_KEYS.refresh)
-                ?? null
+            return getCookie('ai-tarot-id') ?? null
         case 'server':
             const {cookies} = await import('next/headers')
-            return cookies().get(TOKENS_KEYS.access)?.value
-                ?? cookies().get(TOKENS_KEYS.refresh)?.value
+            return cookies().get('ai-tarot-id')?.value
                 ?? null
     }
 }
@@ -91,16 +88,18 @@ const retrieveFetchResponse = async (url: string, method: string, options?: Fetc
     const params = new URLSearchParams(options?.params as unknown as string).toString()
         ?? ''
 
-    const {cookies} = await import('next/headers')
-    const token = await getAuthToken(options?.source ?? 'server')
+    // const token = await getAuthToken(options?.source ?? 'server')
+    // console.log('TOKEN')
+    // console.log(token)
 
     return await fetch(`${BASE_URL}${url}${params ? '?' + params : ''}`, {
         method,
         ...options,
-        headers: {
-            ...(token && {'Cookie': `${token}`}),
-            ...(options?.headers ? {...options?.headers} : {...defaultHeaders}),
-        }
+        // headers: {
+        //     // ...(token && {'Cookie': `ai-tarot-id=${token}`}),
+        //     ...(options?.headers ? {...options?.headers} : {...defaultHeaders}),
+        // },
+        credentials: 'include',
     })
 }
 

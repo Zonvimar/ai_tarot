@@ -123,9 +123,9 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                             </ol>
                                         </p>
                                     </div>
-                                    <div className={'pt-2 w-full items-center'}>
+                                    <div className={'pt-2 pb-4 w-full items-center'}>
                                         <Button size={'lg'}
-                                                className={cn(`flex w-full items-center gap-2 sticky bg-[#27ACC9] h-[60px] font-semibold text-xl rounded-[60px]`)}
+                                                className={cn(`flex w-full items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] font-semibold text-xl rounded-[60px]`)}
                                                 type={'button'}
                                                 onClick={() => router.replace('/auth/register')}
                                         >

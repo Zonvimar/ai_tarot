@@ -1,10 +1,11 @@
 import NavBar from "@/components/widgets/AppNavbar/NavBar";
+import {getConfiguration} from "@/lib/serverActions/auth";
 
 
 const AppNavbar = async() => {
-    // const user = await getUserInfo();
+    const config = await getConfiguration();
     return (
-        <NavBar/>
+        <NavBar config={config}/>
     )
 }
 

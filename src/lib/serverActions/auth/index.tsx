@@ -7,8 +7,15 @@ import {cookies} from "next/headers";
 
 
 
-const checkAuth = async(): Promise<ConfigurationType> => {
-    const res = await fetchService.get(`api/configuration/`)
+const getConfiguration = async(): Promise<ConfigurationType> => {
+    const res = await fetchService.get(`api/configuration/`,
+        {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
+            }
+        })
     return res.data
 }
 
@@ -50,12 +57,13 @@ const loginIntoAccount = async (fd: FormData): Promise<ActionResponse> => {
         })
 
         if (res.ok) {
-            const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
-            cookies().set(TOKENS_KEYS.access, cookieValue, {
-                priority: 'high',
-                sameSite: 'lax',
-            });
-            console.info('Login successful, tokens have been installed')
+            // const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
+            // cookies().set(TOKENS_KEYS.access, cookieValue, {
+            //     priority: 'high',
+            //     sameSite: 'lax',
+            //     httpOnly: true
+            // });
+            // console.info('Login successful, tokens have been installed')
         } else {
             const message = res.data?.detail
             throw new Error(message)
@@ -90,12 +98,12 @@ const registerAccount = async (fd: FormData): Promise<ActionResponse> => {
             }),
         })
         if (res.ok) {
-            const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
-            cookies().set(TOKENS_KEYS.access, cookieValue, {
-                priority: 'high',
-                sameSite: 'lax',
-            });
-            console.info('Login successful, tokens have been installed')
+            // const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
+            // cookies().set(TOKENS_KEYS.access, cookieValue, {
+            //     priority: 'high',
+            //     sameSite: 'lax',
+            // });
+            // console.info('Login successful, tokens have been installed')
         } else {
             const message = res.data?.detail
             throw new Error(message)
@@ -192,7 +200,7 @@ const approveEmail = async (fd: FormData): Promise<ActionResponse> => {
 }
 
 export {
-    checkAuth,
+    getConfiguration,
     checkEmailExists,
     loginIntoAccount,
     registerAccount,

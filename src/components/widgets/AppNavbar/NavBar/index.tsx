@@ -5,8 +5,9 @@ import React, {useState} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import {Image} from "@nextui-org/image";
+import {ConfigurationType} from "@/lib/types/config.types";
 
-const NavBar = () => {
+const NavBar = ({config}: {config: ConfigurationType}) => {
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const pathname = usePathname();
     const showSidebar = () => setSidebarVisible(true);
@@ -16,8 +17,10 @@ const NavBar = () => {
     const getNavItem = () => {
         switch(pathname) {
             case '/':
-                return <div className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
-                    <p className={'flex items-end justify-end'}>300</p>
+            case '/chat/new':
+            case '/chat/[id]':
+                return <div className={'text-medium sm:text-lg flex items-center gap-1 bg-[#2A2A2A] h-[40px] rounded-3xl px-3 py-1.5'}>
+                    <p className={'flex items-end justify-end'}>{config.currentUser.balance}</p>
                     <Image src={'/oracle-icon.svg'} height={22} width={24}/>
                 </div>
             case '/auth/register':
@@ -36,7 +39,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Navbar className={'z-50 bg-opacity-0 '} isBlurred={false} height={'58px'} maxWidth={'full'} classNames={{
+            <Navbar className={`z-50 bg-opacity-0 ${pathname === '/' ? 'lg:hidden' : ''}`} isBlurred={false} height={'58px'} maxWidth={'full'} classNames={{
                 item: [
                     // "flex",
                     // "relative",
@@ -68,7 +71,7 @@ const NavBar = () => {
                         </div>
                     </NavbarItem>
                 </NavbarContent>
-                <NavbarContent justify="end" className={'lg:pr-7 lg:pt-6'}>
+                <NavbarContent justify="end" className={'lg:pr-7 lg:pt-6 gap-2'}>
                     <NavbarItem>
                         {getNavItem()}
                     </NavbarItem>
