@@ -9,15 +9,15 @@ import {askOnboardQuestion} from "@/lib/serverActions/chat";
 
 const Page = async() => {
 
-    // const {ok, data} = await
-    //     fetchService.get<Spread[]>('api/spread/all/', {
-    //         next: {
-    //             tags: ['spreads']
-    //         }
-    //     })
-    // if (!ok) {
-    //     redirect('/auth/onboard')
-    // }
+    const {ok, data} = await
+        fetchService.get<Spread[]>('api/spread/all/', {
+            next: {
+                tags: ['spreads']
+            }
+        })
+    if (!ok) {
+        redirect('/auth/onboard')
+    }
 
     const handleAskQuestion = async (fd: FormData) => {
         'use server'
@@ -29,7 +29,7 @@ const Page = async() => {
     }
     return (
         <>
-            <MainPageForm olderSpreads={[]} handleAskQuestion={handleAskQuestion}/>
+            <MainPageForm olderSpreads={data} handleAskQuestion={handleAskQuestion}/>
         </>
     )
 }

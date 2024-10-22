@@ -26,13 +26,13 @@ const Page: FC<Props> = ({searchParams}) => {
             console.log(res)
 
             if (res.ok) {
-                // const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
-                // cookies().set(TOKENS_KEYS.access, cookieValue, {
-                //     priority: 'high',
-                //     sameSite: 'lax',
-                //     httpOnly: true
-                // });
-                // console.info('Login successful, tokens have been installed')
+                const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
+                cookies().set(TOKENS_KEYS.access, cookieValue, {
+                    priority: 'high',
+                    sameSite: 'lax',
+                    // httpOnly: true
+                });
+                console.info('Login successful, tokens have been installed')
             } else {
                 const message = res.data?.detail
                 throw new Error(message)

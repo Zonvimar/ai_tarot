@@ -4,7 +4,7 @@ import {FetchOptionsT, FetchServiceT} from '@/configs/http-service/fetch-setting
 
 const defaultHeaders: { [key: string]: string } = {
     'Content-Type': 'application/json',
-    'Accept': '*/*',
+    'Accept': '/*/',
 }
 
 
@@ -12,10 +12,13 @@ const getAuthToken: (source: 'client' | 'server') => Promise<string | null> = as
     switch (source) {
         case 'client':
             const {getCookie} = await import('cookies-next')
-            return getCookie('ai-tarot-id') ?? null
+            return getCookie(TOKENS_KEYS.access)
+                ?? getCookie(TOKENS_KEYS.access)
+                ?? null
         case 'server':
             const {cookies} = await import('next/headers')
-            return cookies().get('ai-tarot-id')?.value
+            return cookies().get(TOKENS_KEYS.access)?.value
+                ?? cookies().get(TOKENS_KEYS.access)?.value
                 ?? null
     }
 }
@@ -88,18 +91,17 @@ const retrieveFetchResponse = async (url: string, method: string, options?: Fetc
     const params = new URLSearchParams(options?.params as unknown as string).toString()
         ?? ''
 
-    // const token = await getAuthToken(options?.source ?? 'server')
-    // console.log('TOKEN')
-    // console.log(token)
+    const token = await getAuthToken(options?.source ?? 'server')
+    console.log('TOKEN')
+    console.log(token?.split(';')[0])
 
     return await fetch(`${BASE_URL}${url}${params ? '?' + params : ''}`, {
         method,
         ...options,
-        // headers: {
-        //     // ...(token && {'Cookie': `ai-tarot-id=${token}`}),
-        //     ...(options?.headers ? {...options?.headers} : {...defaultHeaders}),
-        // },
-        credentials: 'include',
+        headers: {
+            ...(token && {'Cookie': `${token?.split(';')[0]}`}),
+            ...(options?.headers ? {...options?.headers} : {...defaultHeaders}),
+        },
     })
 }
 

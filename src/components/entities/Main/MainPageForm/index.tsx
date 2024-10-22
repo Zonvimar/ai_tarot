@@ -22,51 +22,11 @@ type Props = {
 
 const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
     const [sidebarVisible, setSidebarVisible] = useState(false);
-    // const [olderSp, setOlderSp] = useState<>([]);
     const pathname = usePathname();
     const router = useRouter();
     const showSidebar = () => setSidebarVisible(true);
     const hideSidebar = () => setSidebarVisible(false);
 
-    const getOlderSpreads = async() => {
-        try {
-            const res = await fetch('http://152.42.132.41:5000/api/spread/all/', {
-                method: 'GET',
-                credentials: 'include',
-            })
-            console.log(res)
-
-
-            if (res.ok) {
-                // const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
-                // setCookie('ai-tarot-id', cookieValue, {
-                //     priority: 'high',
-                //     sameSite: 'lax',
-                //     httpOnly: true
-                // });
-                console.info('Login successful, tokens have been installed')
-            }
-        } catch (e) {
-            if (e instanceof Error) {
-                return {
-                    status: 'error',
-                    message: e.message,
-                }
-            }
-            return {
-                status: 'error',
-                message: 'Что-то пошло не так, попробуйте еще раз',
-            }
-        }
-        return {
-            status: 'ok',
-            message: 'Аутентификация успешна'
-        }
-    }
-
-    useEffect(() => {
-        getOlderSpreads()
-    }, []);
 
     return (
         <>
