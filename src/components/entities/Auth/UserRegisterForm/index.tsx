@@ -7,24 +7,26 @@ import {Image} from "@nextui-org/image";
 import FormWrapper from "@/components/shared/FormWrapper";
 import Link from "next/link";
 import {ActionResponse} from "@/configs/http-service/fetch-settings/types";
-import {useSearchParams} from "next/navigation";
+import {redirect, useRouter, useSearchParams} from "next/navigation";
 import {I18nProvider} from "@react-aria/i18n";
 import ImageBlock from "@/components/entities/Auth/ImageBlock";
+import fetchService from "@/configs/http-service/fetch-settings";
+import {setCookie} from "cookies-next";
 
 type Props = {
-    // addInfo: boolean,
     handleAddInfo: ((fd: FormData) => Promise<ActionResponse>),
     handleRegister: ((fd: FormData) => Promise<ActionResponse>),
+    onboardQuestion: string | undefined,
 }
 
-const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
+const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister, onboardQuestion}) => {
     const [value, setValue] = useState("");
     const [emailValue, setEmailValue] = useState("");
     const [emailExists, setEmailExists] = useState(false);
     const [selectedGender, setSelectedGender] = useState("female");
     const [dateOfBirth, setDateOfBirth] = useState<DateValue | null | undefined>(null);
     const [dateOfBirthExists, setDateOfBirthExists] = useState(false);
-    // const router = useRouter()
+    const router = useRouter()
     const searchParams = useSearchParams();
     const addInfo = !!searchParams?.get('addInfo')
     const question = searchParams?.get('onboardQuestion') ?? ''
@@ -44,12 +46,65 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister}) => {
         return value.length < 8
     }, [value])
 
+    const handleSubmitRegister = async (fd: FormData) => {
+        // 'use server'
+        const res = await handleAddInfo(fd)
+
+        if (res.status === 'ok') {
+            try {
+                const res = await fetchService.post('api/account/login/', {
+                    body: JSON.stringify({
+                        email: fd.get('email'),
+                        password: fd.get('password')
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    source: 'client',
+                    credentials: 'include',
+                })
+
+                if(res.ok) {
+                    const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
+                    setCookie('ai-tarot', cookieValue, {
+                        priority: 'high',
+                        sameSite: 'lax',
+                        httpOnly: true
+                    });
+
+                    onboardQuestion ?
+                        router.replace(`/chat/new?onboardQuestion=${onboardQuestion}`)
+                        :
+                        router.replace(`/chat/new`)
+                }
+                console.log(res)
+            } catch (e) {
+                if (e instanceof Error) {
+                    return {
+                        status: 'error',
+                        message: e.message,
+                    }
+                }
+                return {
+                    status: 'error',
+                    message: 'Что-то пошло не так, попробуйте еще раз',
+                }
+            }
+            return {
+                status: 'ok',
+                message: 'Аутентификация успешна'
+            }
+        }
+        return res
+    }
+
     return (
         <>
             {/*<div className={'flex flex-col justify-center gap-4 h-full'}>*/}
             {/*    */}
                 <div className={'grid place-items-start h-full'}>
-                    <FormWrapper action={addInfo ? handleAddInfo : handleRegister}
+                    <FormWrapper action={addInfo ? handleSubmitRegister : handleRegister}
                                  infoUnderButton={!addInfo &&
                                      <div className={'flex gap-1 text-center w-full items-center'}>
                                          <p className={'text-xs w-full text-center text-[#BEBEBE]'}>

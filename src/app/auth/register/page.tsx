@@ -5,18 +5,21 @@ import {redirect} from "next/navigation";
 
 type Props = {
     searchParams: {
-        add_info: string
+        add_info: string,
+        onboardQuestion?: string,
     }
 }
 
 const Page: FC<Props> = ({searchParams}) => {
-    const addInfo = !!searchParams.add_info
-
+    const onboardQuestion = searchParams.onboardQuestion
     const handleRegister = async (fd: FormData) => {
         'use server'
         const res = await checkEmailExists(fd)
         if (res.status === 'ok') {
-            redirect(`/auth/register?addInfo=true`)
+            onboardQuestion ?
+                redirect(`/auth/register?addInfo=true&onboardQuestion=${onboardQuestion}`)
+                :
+                redirect(`/auth/register?addInfo=true`)
         }
         return res
     }
@@ -24,16 +27,13 @@ const Page: FC<Props> = ({searchParams}) => {
     const handleAddInfo = async (fd: FormData) => {
         'use server'
         const res = await registerAccount(fd)
-        if (res.status === 'ok') {
-            redirect(`/auth/approve-email?email=${fd.get('email')}`)
-        }
         return res
     }
 
     return (
         <>
             <UserProfileForm
-                // addInfo={addInfo}
+                onboardQuestion={onboardQuestion}
                 handleAddInfo={handleAddInfo}
                 handleRegister={handleRegister}
             />

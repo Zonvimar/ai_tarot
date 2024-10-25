@@ -99,7 +99,7 @@ const retrieveFetchResponse = async (url: string, method: string, options?: Fetc
         method,
         ...options,
         headers: {
-            ...(token && {'Cookie': `${token?.split(';')[0]}`}),
+            ...(!options?.source && {'Cookie': `${token?.split(';')[0]}`}),
             ...(options?.headers ? {...options?.headers} : {...defaultHeaders}),
         },
     })

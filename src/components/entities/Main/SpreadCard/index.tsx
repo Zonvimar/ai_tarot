@@ -1,11 +1,27 @@
+'use client'
 import {Spread} from "@/lib/types/spread.types";
 import {Image} from "@nextui-org/image";
-import React from "react";
+import React, {FC} from "react";
+import {useRouter} from "next/navigation";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 
-const SpreadCard = ({spread}: {spread: Spread}) => {
+type SpreadCardProps = {
+    spread: Spread
+    redirectType: 'params' | 'page'
+}
+const SpreadCard: FC<SpreadCardProps> = ({spread, redirectType}) => {
+    const router = useRouter();
     return (
-        <div className={'flex gap-2 justify-between items-center w-full p-4 border-[1px] border-[#27ACC9] rounded-xl shadow-spread-card backdrop-blur-spread-card'}>
+        <div onClick={
+            () => {
+                redirectType === 'page' ?
+                    router.push(`/chat/${spread.id}` )
+                    :
+                    router.push(`?chatId=${spread.id}` )
+            }
+        }
+             className={'flex gap-2 justify-between items-center w-full p-4 border-[1px] border-[#27ACC9] rounded-xl shadow-spread-card backdrop-blur-spread-card'}>
             <div className={'flex flex-col gap-1 w-full truncate'}>
                 <p className={'text-sm sm:text-lg font-semibold truncate w-full'}>{spread.question}</p>
                 {/*<p className={'text-sm font-normal'}>{spread.answer}</p>*/}

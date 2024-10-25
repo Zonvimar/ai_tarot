@@ -1,13 +1,16 @@
 import ThemeProvider from '@/components/providers/NextUiProvider'
 import React from 'react'
 import {Toaster} from 'sonner'
+import {ConfigurationProvider} from "@/components/providers/ConfigurationProvider";
 
 const AppProviders = ({children}: { children: React.ReactNode }) => {
     return (
         <>
             <ThemeProvider>
-                <Toaster />
-                {children}
+                <ConfigurationProvider>
+                    <Toaster />
+                    {children}
+                </ConfigurationProvider>
             </ThemeProvider>
         </>
     )

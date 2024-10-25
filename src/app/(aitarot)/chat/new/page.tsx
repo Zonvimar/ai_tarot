@@ -7,15 +7,17 @@ import NewChatForm from "@/components/entities/Main/NewChatForm";
 type Props = {
     searchParams: {
         email: string,
+        onboardQuestion?: string,
         resetPassword: string,
     }
 }
 
 const Page: FC<Props> = async({searchParams}) => {
+    const onboardQuestion = searchParams.onboardQuestion
 
     return (
         <>
-            <NewChatForm/>
+            <NewChatForm onboardQuestion={onboardQuestion}/>
         </>
     )
 }

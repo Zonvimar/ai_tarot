@@ -50,7 +50,7 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                                         History</p>
                                     {
                                         olderSpreads.map((spread: Spread) => (
-                                            <SpreadCard spread={spread}/>
+                                            <SpreadCard spread={spread} redirectType={'params'}/>
                                         ))
                                     }
                                 </div>
@@ -190,7 +190,7 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                                 History</p>
                             {
                                 olderSpreads.map((spread: Spread) => (
-                                    <SpreadCard spread={spread}/>
+                                    <SpreadCard spread={spread} redirectType={'page'}/>
                                 ))
                             }
                         </div>

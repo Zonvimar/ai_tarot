@@ -4,11 +4,11 @@ import React from 'react'
 import {getConfiguration} from "@/lib/serverActions/auth";
 
 const AppLayout = async({children}: { children: React.ReactNode }) => {
-    // const config = await getConfiguration()
-    // console.log(config)
-    // if(!config.currentUser.isAuthenticated) {
-    //     return redirect('/auth/onboard')
-    // }
+    const config = await getConfiguration()
+    console.log(config)
+    if(!config.currentUser.isAuthenticated) {
+        return redirect('/auth/onboard')
+    }
     return (
         <div className={'min-h-[calc(100dvh)] bg-center bg-cover bg-gradient-with-image-chat lg:bg-gradient-main'}>
             {/*<div className={'flex overflow-hidden'}>*/}

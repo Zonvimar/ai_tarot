@@ -12,7 +12,8 @@ const config: Config = {
         extend: {
             boxShadow: {
                 'spread-card': '0px 2px 14px 0px rgba(34, 135, 157, 0.65)',
-                'button': '0px 4px 14px 0px rgba(34, 135, 157, 1);',
+                'button': '0px 4px 14px 0px rgba(34, 135, 157, 1)',
+                // 'add-oracles': '0px 4px 14px 0px rgba(34, 135, 157, 1)',
             },
             backdropBlur: {
                 'spread-card': '26px',

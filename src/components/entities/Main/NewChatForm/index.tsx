@@ -1,35 +1,65 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {Spread} from "@/lib/types/spread.types";
 import fetchService from "@/configs/http-service/fetch-settings";
 import {Button} from "@nextui-org/react";
 import {Image} from "@nextui-org/image";
 import {Input} from "@nextui-org/input";
+import {useConfiguration} from "@/components/providers/ConfigurationProvider";
+import {useRouter} from "next/navigation";
 
 
-const NewChatForm = () => {
-    const [messages, setMessages] = useState<{message: string, isUser: boolean}[]>([])
-    const [loading, setLoading] = useState(false)
-    const [questionInputValue, setQuestionInputValue] = useState('')
+const NewChatForm = ({onboardQuestion}: {onboardQuestion: string | undefined}) => {
+    const router = useRouter();
+    const { fetchConfiguration, configuration } = useConfiguration();
+    const [messages, setMessages] = useState<{ message: string, isUser: boolean }[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [questionInputValue, setQuestionInputValue] = useState('');
 
+    const handleAskQuestion = useCallback(async (question: string) => {
+        setMessages(prevMessages => [...prevMessages, { message: question, isUser: true }]);
+        setQuestionInputValue(''); // очищаем поле ввода
+    }, []);
 
-    const handleAskQuestion = async(question: string) => {
-        setMessages([{message: question, isUser: true}])
-        setLoading(true)
-        const res = await fetchService.post<Spread>('api/spread/create/', {
-            body: JSON.stringify({
-                question: question
-            }),
-            source: 'client'
-        })
-        console.log(res)
-        if(res.ok) {
-            setMessages([...messages, {message: res.data.question, isUser: false}])
+    const getAnswer = useCallback(async (question: string) => {
+        setLoading(true);
+        try {
+            const res = await fetchService.post<Spread>('api/spread/create/', {
+                body: JSON.stringify({ question }),
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                source: 'client',
+                next: {
+                    tags: ['all']
+                }
+            });
+            if (res.ok) {
+                await fetchConfiguration();
+                setMessages(prevMessages => [...prevMessages, { message: res.data.answer, isUser: false }]);
+            } else if (res.status === 400) {
+                router.push('/buy/oracles')
+            }
+        } catch (error) {
+            console.error('Error fetching answer:', error);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false)
-    }
+    }, []);
 
+    useEffect(() => {
+        if (onboardQuestion) {
+            setMessages([{ message: onboardQuestion, isUser: true }]);
+        }
+    }, [onboardQuestion]);
 
+    useEffect(() => {
+        if (messages.length > 0 && messages[messages.length - 1].isUser) {
+            getAnswer(messages[messages.length - 1].message);
+        }
+    }, [messages, getAnswer]);
 
     return (
         <>
@@ -90,6 +120,8 @@ const NewChatForm = () => {
                     <div className="flex-shrink-0 flex justify-center flex-col gap-2 w-full ifems-center">
                         <Input
                             required
+                            isDisabled={loading}
+                            // isReadOnly={loading}
                             placeholder={'Ask something'}
                             name={'question'}
                             onValueChange={(value) => setQuestionInputValue(value)}

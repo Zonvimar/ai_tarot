@@ -8,11 +8,13 @@ type Props = {
     searchParams: {
         email: string,
         resetPassword: string,
+        onboardQuestion?: string,
     }
 }
 
 const Page: FC<Props> = async({searchParams}) => {
     const email = searchParams.email ?? 'failed'
+    const onboardQuestion = searchParams.onboardQuestion
     const resetPassword = !!searchParams.resetPassword
 
 
@@ -21,7 +23,10 @@ const Page: FC<Props> = async({searchParams}) => {
         console.log(fd.get('code'))
         const res = await approveEmail(fd)
         if (res.status === 'ok') {
-            redirect('/')
+            onboardQuestion ?
+                redirect(`/chat/new?addInfo=true&onboardQuestion=${onboardQuestion}`)
+                :
+                redirect(`/chat/new`)
         }
         return res
     }

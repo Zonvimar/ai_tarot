@@ -21,7 +21,7 @@ const Page: FC<Props> = ({searchParams}) => {
                     email: fd.get('email'),
                     password: fd.get('password')
                 }),
-                // credentials: 'include',
+                credentials: 'include',
             })
             console.log(res)
 
@@ -30,7 +30,7 @@ const Page: FC<Props> = ({searchParams}) => {
                 cookies().set(TOKENS_KEYS.access, cookieValue, {
                     priority: 'high',
                     sameSite: 'lax',
-                    // httpOnly: true
+                    httpOnly: true
                 });
                 console.info('Login successful, tokens have been installed')
             } else {
@@ -54,12 +54,6 @@ const Page: FC<Props> = ({searchParams}) => {
             message: 'Аутентификация успешна'
         }
 
-
-        // const res = await loginIntoAccount(fd)
-        // if (res.status === 'ok') {
-        //     redirect('/')
-        // }
-        // return res
     }
     return (
         <>
