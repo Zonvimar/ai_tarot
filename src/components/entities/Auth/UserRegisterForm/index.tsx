@@ -74,9 +74,9 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister, onboardQuest
                     });
 
                     onboardQuestion ?
-                        router.replace(`/chat/new?onboardQuestion=${onboardQuestion}`)
+                        router.push(`/chat/new?onboardQuestion=${onboardQuestion}`)
                         :
-                        router.replace(`/chat/new`)
+                        router.push(`/chat/new`)
                 }
                 console.log(res)
             } catch (e) {

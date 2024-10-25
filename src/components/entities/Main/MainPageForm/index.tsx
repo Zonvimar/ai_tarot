@@ -199,7 +199,7 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                 </div>
                 <div
                     className="flex-shrink-0 flex justify-center  flex-col pb-3 gap-2 w-full ifems-center">
-                    <Button onClick={() => router.replace('/chat/new')}
+                    <Button onClick={() => router.push('/chat/new')}
                         className={`flex items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`}>
                         Get a Tarot reading
                     </Button>

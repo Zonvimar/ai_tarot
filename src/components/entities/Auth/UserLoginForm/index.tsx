@@ -47,7 +47,7 @@ const UserLoginForm: FC<Props> = ({handleAuth}) => {
                         httpOnly: true
                     });
                     await fetchConfiguration();
-                    router.replace('/chat/new')
+                    router.push('/chat/new')
                 }
                 console.log(res)
             } catch (e) {

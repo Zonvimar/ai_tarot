@@ -16,7 +16,7 @@ const SpreadCard: FC<SpreadCardProps> = ({spread, redirectType}) => {
         <div onClick={
             () => {
                 redirectType === 'page' ?
-                    router.push(`/chat/${spread.id}` )
+                    router.push(`/chat/${spread.id}?chatDate=${spread.date}` )
                     :
                     router.push(`?chatId=${spread.id}` )
             }

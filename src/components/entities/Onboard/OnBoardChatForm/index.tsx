@@ -127,7 +127,7 @@ const OnBoardChatForm = ({handleAskQuestion}: {handleAskQuestion: (fd: FormData)
                                         <Button size={'lg'}
                                                 className={cn(`flex w-full items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] font-semibold text-xl rounded-[60px]`)}
                                                 type={'button'}
-                                                onClick={() => router.replace('/auth/register')}
+                                                onClick={() => router.push('/auth/register')}
                                         >
                                             Ask question for free
                                         </Button>

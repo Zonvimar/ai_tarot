@@ -1,17 +1,20 @@
 'use client'
-import {Button, Navbar, NavbarContent, NavbarItem} from '@nextui-org/react'
+import {Button, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@nextui-org/react'
 import {AlignJustify, X} from "lucide-react";
-import React, {useState} from "react";
-import {usePathname} from "next/navigation";
+import React, {FC, useState} from "react";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import Link from "next/link";
 import {Image} from "@nextui-org/image";
 import {ConfigurationType} from "@/lib/types/config.types";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
 
-const NavBar = ({config}: {config: ConfigurationType}) => {
+
+const NavBar = () => {
     const { configuration } = useConfiguration();
+    const searchParams = useSearchParams();
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
     const showSidebar = () => setSidebarVisible(true);
     const hideSidebar = () => setSidebarVisible(false);
 
@@ -60,8 +63,14 @@ const NavBar = ({config}: {config: ConfigurationType}) => {
                     'px-2'
                 ]
             }}>
-                <NavbarContent justify="start">
-                </NavbarContent>
+                <NavbarBrand className={'w-full items-center pl-2 gap-3'}>
+                    <div onClick={() => {
+                        router.back()
+                    }} className={'cursor-pointer w-[15px] h-[15px]'}>
+                        <Image src={'/chevronLeft.svg'} height={15} width={9}/>
+                    </div>
+                    {searchParams.has('chatDate') ? <p className={'text-xl font-semibold'}>Chat from {searchParams.get('chatDate')}</p> : null}
+                </NavbarBrand>
                 <NavbarContent className={`${pathname !== '/auth/onboard' ? 'hidden' : 'flex sm:hidden'}`} justify="center">
                     <NavbarItem>
                         <p className={'text-xl sm:text-3xl text-center font-semibold'}>Aita, ai tarologist</p>

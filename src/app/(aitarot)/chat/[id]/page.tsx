@@ -7,8 +7,7 @@ import HistoryChat from "@/components/entities/Main/HistoryChat";
 
 type Props = {
     searchParams: {
-        email: string,
-        resetPassword: string,
+        chatDate: string,
     },
     params: {
         id: string,
