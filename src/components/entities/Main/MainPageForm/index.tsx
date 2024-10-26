@@ -177,7 +177,7 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
             <div
                 className={`flex flex-col px-2 min-h-[calc(100dvh-58px)] lg:hidden h-full justify-center gap-2 w-full`}>
                 <div
-                    className={`flex-grow overflow-y-auto max-h-[calc(100dvh-120px)] sm:max-h-[calc(100dvh-60px)]`}>
+                    className={`flex-grow overflow-y-auto max-h-[calc(100dvh-140px)] sm:max-h-[calc(100dvh-60px)]`}>
                     <div className={'flex flex-col w-full items-center gap-4 h-full pt-5'}>
                         <ImageBlock imageSrc={'/onboard.png'}>
                             <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
@@ -185,7 +185,7 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                             </h1>
                         </ImageBlock>
                         <div
-                            className={'flex flex-col gap-2 w-full max-w-[362px] px-4 items-center justify-center'}>
+                            className={'flex flex-col gap-2 w-full max-w-[362px] pb-3 px-4 items-center justify-center'}>
                             <p className={'font-normal text-xl w-full pb-2 items-start justify-start'}>Chat
                                 History</p>
                             {

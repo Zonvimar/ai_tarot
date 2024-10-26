@@ -1,5 +1,5 @@
 'use client'
-import {Button, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@nextui-org/react'
+import {Avatar, Button, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@nextui-org/react'
 import {AlignJustify, X} from "lucide-react";
 import React, {FC, useState} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
@@ -69,7 +69,25 @@ const NavBar = () => {
                     }} className={'cursor-pointer w-[15px] h-[15px]'}>
                         <Image src={'/chevronLeft.svg'} height={15} width={9}/>
                     </div>
-                    {searchParams.has('chatDate') ? <p className={'text-xl font-semibold'}>Chat from {searchParams.get('chatDate')}</p> : null}
+                    {pathname === '/chat/new' ?
+                        <div
+                            className={'flex gap-1.5 items-center text-xl font-semibold'}>
+                            <Avatar isBordered className="w-9 h-9 text-tiny"
+                                    src={'/avatar.png'}
+                                    classNames={{
+                                        base: 'ring-offset-0 ring-[#27ACC9]'
+                                    }}
+                            />
+                            <p>Aita</p>
+                        </div>
+                        :
+                        null
+                    }
+                    {searchParams.has('chatDate') ?
+                        <p className={'text-xl font-semibold'}>Chat from {searchParams.get('chatDate')}</p>
+                        :
+                        null
+                    }
                 </NavbarBrand>
                 <NavbarContent className={`${pathname !== '/auth/onboard' ? 'hidden' : 'flex sm:hidden'}`} justify="center">
                     <NavbarItem>
