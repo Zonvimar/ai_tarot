@@ -33,7 +33,6 @@ export const ConfigurationProvider: React.FC<{ children: React.ReactNode }> = ({
         });
         console.log('PROVIDER')
         console.log(res)
-        // const data: ConfigurationType = await res.data
         setConfiguration(res.data);
     };
 
