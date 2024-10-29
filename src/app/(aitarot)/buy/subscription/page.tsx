@@ -1,9 +1,11 @@
 import React, {FC} from 'react'
+import SubscriptionForm from "@/components/entities/Buy/SubscriptionForm";
 
 const Page = async() => {
+
     return (
         <>
-        <h1>Subscribe to unlock all Aita feauteres</h1>
+            <SubscriptionForm/>
         </>
     )
 }

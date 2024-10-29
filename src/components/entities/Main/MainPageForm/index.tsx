@@ -10,6 +10,7 @@ import {Button} from "@nextui-org/react";
 import {AlignJustify} from "lucide-react";
 import {Image} from "@nextui-org/image";
 import FormWrapper from "@/components/shared/FormWrapper";
+import {useRouter} from "next/navigation";
 import MessageInput from "@/components/shared/Inputs/MessageInput";
 import SideBar from "@/components/widgets/SideBar";
 
@@ -21,7 +22,9 @@ type Props = {
 
 const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
     const [sidebarVisible, setSidebarVisible] = useState(false);
+    const router = useRouter();
     const showSidebar = () => setSidebarVisible(true);
+
 
     return (
         <>
@@ -70,8 +73,11 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                         actionLabel={'Send message'}
                     >
                         <div className={`flex h-full justify-center gap-2 sm:w-[580px] w-full`}>
+                            {/*<div*/}
+                            {/*    className={`flex-grow overflow-y-auto`}>*/}
                             <div className={'flex flex-col w-full items-center gap-4 h-full px-4'}>
                                 <div className={'z-10 gap-2 flex justify-between w-full pt-1'}>
+                                    {/*<p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>*/}
                                     <div
                                         className={'w-full flex gap-1 items-center justify-start text-xl sm:text-2xl font-semibold'}>
                                         Chat with Aita
@@ -89,6 +95,8 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                                         </div>
                                     </div>
                                 </div>
+                                {/*</div>*/}
+
                             </div>
                         </div>
                     </FormWrapper>
@@ -103,13 +111,50 @@ const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
                             <AlignJustify strokeWidth={1.5} className="text-white h-5 w-7"/>
                         </Button>
                     </div>
+
+
                 </div>
                 <SideBar
                     open={sidebarVisible}
                     setOpen={setSidebarVisible}
                 />
             </div>
+
+            <div
+                className={`flex flex-col px-2 min-h-[calc(100dvh-58px)] lg:hidden h-full justify-center gap-2 w-full`}>
+                <div
+                    className={`flex-grow overflow-y-auto max-h-[calc(100dvh-140px)] sm:max-h-[calc(100dvh-60px)]`}>
+                    <div className={'flex flex-col w-full items-center gap-4 h-full pt-5'}>
+                        <ImageBlock imageSrc={'/onboard.png'}>
+                            <h1 className={'w-full text-center text-2xl sm:text-3xl font-bold'}>
+                                Nice to meet you 👋
+                            </h1>
+                        </ImageBlock>
+                        <div
+                            className={'flex flex-col gap-2 w-full max-w-[362px] pb-3 px-4 items-center justify-center'}>
+                            <p className={'font-normal text-xl w-full pb-2 items-start justify-start'}>Chat
+                                History</p>
+                            {
+                                olderSpreads.map((spread: Spread) => (
+                                    <SpreadCard spread={spread} redirectType={'page'}/>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div
+                    className="flex-shrink-0 flex justify-center  flex-col pb-3 gap-2 w-full ifems-center">
+                    <Button onClick={() => router.push('/chat/new')}
+                        className={`flex items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`}>
+                        Get a Tarot reading
+                    </Button>
+                    {/*<SubmitButton label={'Get a Tarot reading'}/>*/}
+                </div>
+            </div>
         </>
+
+
     )
 }
 

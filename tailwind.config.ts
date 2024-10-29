@@ -13,6 +13,7 @@ const config: Config = {
             boxShadow: {
                 'spread-card': '0px 2px 14px 0px rgba(34, 135, 157, 0.65)',
                 'button': '0px 4px 14px 0px rgba(34, 135, 157, 1)',
+                'sub-card': '0px 4px 15px 0px rgba(39, 172, 201, 1)',
                 // 'add-oracles': '0px 4px 14px 0px rgba(34, 135, 157, 1)',
             },
             backdropBlur: {
@@ -21,6 +22,10 @@ const config: Config = {
             backgroundImage: {
                 'gradient-with-image': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/Background.png')",
                 'gradient-with-image-chat': "linear-gradient(180deg, rgba(14, 23, 36, 0.25) 0%, #0E1724 40%), url('/mainBackground.png')",
+                'gradient-with-image-sub': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 78.5%), url('/buySubSm.png')",
+                'gradient-with-image-sub-lg': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%), url('/buySub.png')",
+                'gradient-with-image-oracles': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 64.5%), url('/buyOraclesSm.png')",
+                'gradient-with-image-oracles-lg': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%), url('/buyOracles.png')",
                 'gradient-main': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%)",
                 'gradient-main-chat': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%), url('/mainBackground.png')",
                 'gradient-main-left': "linear-gradient(180deg, rgba(14, 23, 36, 0) 0%, #0E1724 95%), url('/chatBackground.png')",

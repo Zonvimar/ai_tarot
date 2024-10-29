@@ -22,7 +22,6 @@ const NavBar = () => {
         switch(pathname) {
             case '/':
             case '/chat/new':
-            case '/chat/[id]':
                 return <div className={'text-medium sm:text-lg flex items-center gap-1 bg-[#2A2A2A] h-[40px] rounded-3xl px-3 py-1.5'}>
                     <p className={'flex items-end justify-end'}>{configuration?.currentUser.balance}</p>
                     <Image src={'/oracle-icon.svg'} height={22} width={24}/>
@@ -95,7 +94,7 @@ const NavBar = () => {
                     <NavbarItem>
                         {getNavItem()}
                     </NavbarItem>
-                    <NavbarItem className={`${pathname.includes('/buy') ? 'hidden' : ''}`}>
+                    <NavbarItem>
                         <Button isIconOnly
                                 className={'flex items-center justify-center bg-[rgba(69,69,69,0.5)] backdrop-blur-2xl rounded-full h-10 w-10'}
                                 onClick={showSidebar}>

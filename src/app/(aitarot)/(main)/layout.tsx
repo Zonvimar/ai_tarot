@@ -8,7 +8,7 @@ const AppLayout = async({children}: { children: React.ReactNode }) => {
             {/*<div className={'flex overflow-hidden'}>*/}
             <NavBar/>
             {/*</div>*/}
-            <div className={`min-h-[calc(100dvh-58px)] lg:min-h-[calc(100dvh) w-full flex items-center justify-center overflow-y-hidden`}>
+            <div className={`min-h-[calc(100dvh-58px)] lg:min-h-[calc(100dvh)] w-full flex items-center justify-center overflow-y-hidden`}>
                 <main className={'max-w-[520px] lg:max-w-full sm:items-start w-full h-full flex overflow-auto'}>
                     {children}
                 </main>

@@ -6,6 +6,7 @@ import {Button} from "@nextui-org/react";
 import {X} from "lucide-react";
 import Link from "next/link";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
+import LogoutButton from "@/components/shared/LogoutButton";
 
 interface Props {
     open: boolean,
@@ -29,7 +30,7 @@ const SideBar: FC<Props> = ({ open, setOpen }) => {
                 className={`fixed top-0 right-0 z-50 px-4 h-screen w-72 lg:w-[460px] bg-[#161E2C] flex flex-col gap-2 items-start transition-transform transform ${
                     open ? 'translate-x-0' : 'translate-x-full'
                 }`}>
-                <li className="w-full flex lg:pt-7 pt-2 lg:pr-4 jusfity-beetween items-center lg:justify-end">
+                <li className={`w-full flex lg:pt-7 pt-2 lg:pr-4 ${configuration?.currentUser.isAuthenticated ? 'justify-between' : 'justify-end'} items-center lg:justify-end`}>
                     {configuration?.currentUser.isAuthenticated &&
                         <div className={'w-full'}>
                             <div
@@ -41,7 +42,7 @@ const SideBar: FC<Props> = ({ open, setOpen }) => {
                     }
                     <Button isIconOnly className={'h-10 w-10 flex justify-center bg-[#161E2C] items-center'}
                             onClick={hideSidebar}>
-                        <X className="text-white h-8 w-8"/>
+                        <X strokeWidth={1.7} className="text-white h-8 w-8"/>
                     </Button>
                 </li>
                 <div className={'flex flex-col gap-4'}>
@@ -62,9 +63,7 @@ const SideBar: FC<Props> = ({ open, setOpen }) => {
                                 </li>
                             </div>
                             <li onClick={hideSidebar} className="w-full font-light text-xl">
-                                <Link href={'/'}>
-                                    Log Out
-                                </Link>
+                                <LogoutButton/>
                             </li>
                         </>
                         :

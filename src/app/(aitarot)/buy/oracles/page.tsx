@@ -1,9 +1,10 @@
 import React, {FC} from 'react'
+import BuyOraclesForm from "@/components/entities/Buy/BuyOraclesForm";
 
 const Page = async() => {
     return (
         <>
-        <h1>Add more Oracles to ask next question</h1>
+            <BuyOraclesForm/>
         </>
     )
 }

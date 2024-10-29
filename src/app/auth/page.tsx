@@ -30,7 +30,6 @@ const Page: FC<Props> = ({searchParams}) => {
                 cookies().set(TOKENS_KEYS.access, cookieValue, {
                     priority: 'high',
                     sameSite: 'lax',
-                    httpOnly: true
                 });
                 console.info('Login successful, tokens have been installed')
             } else {
