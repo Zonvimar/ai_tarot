@@ -1,12 +1,7 @@
 'use client'
 import React, {useCallback, useEffect, useState} from 'react'
-import {Spread} from "@/lib/types/spread.types";
-import fetchService from "@/configs/http-service/fetch-settings";
-import {Avatar, Button} from "@nextui-org/react";
-import {Image} from "@nextui-org/image";
-import {Input} from "@nextui-org/input";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import MessagesDisplay from "@/components/entities/message/MessageDisplay";
 import QuestionInput from "@/components/shared/Inputs/QuestionInput";
 import fetchAnswer from "@/lib/clientActions/chat/fetch-answer";

@@ -14,7 +14,7 @@ interface MessagesDisplayProps {
 }
 
 const MessagesDisplay: React.FC<MessagesDisplayProps> = ({ messages, userName, loading }) => (
-    <div className="flex-grow overflow-y-auto max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-190px)]">
+    <div className="flex-grow overflow-y-auto max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-150px)]">
         <div className="flex flex-col w-full gap-6 h-full">
             <div className="text-medium sm:text-lg flex px-2 flex-col gap-2 items-start w-full max-w-[396px]">
                 {messages.map((m, index) => (
