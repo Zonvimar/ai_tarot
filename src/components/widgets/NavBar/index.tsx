@@ -1,8 +1,8 @@
 'use client'
 import {Avatar, Button, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@nextui-org/react'
 import {AlignJustify} from "lucide-react";
-import React, {useState} from "react";
-import {usePathname, useSearchParams} from "next/navigation";
+import React, {Suspense, useState} from "react";
+import {ReadonlyURLSearchParams, usePathname, useSearchParams} from "next/navigation";
 import Link from "next/link";
 import {Image} from "@nextui-org/image";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
@@ -12,8 +12,9 @@ import SideBar from "@/components/widgets/SideBar";
 
 const NavBar = () => {
     const { configuration } = useConfiguration();
+    const searchParams = useSearchParams()
+
     const pathname = usePathname();
-    const searchParams = useSearchParams();
     const [sidebarVisible, setSidebarVisible] = useState(false);
 
     const showSidebar = () => setSidebarVisible(true);

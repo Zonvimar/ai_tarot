@@ -1,3 +1,4 @@
+'use server'
 import UserLoginForm from '../../components/entities/Auth/UserLoginForm'
 import {loginIntoAccount} from '@/lib/serverActions/auth'
 import React, {FC} from 'react'
@@ -6,13 +7,8 @@ import fetchService from "@/configs/http-service/fetch-settings";
 import {cookies} from "next/headers";
 import {TOKENS_KEYS} from "@/configs/http-service/constants/authTokens";
 
-type Props = {
-    searchParams: {
-        [key: string]: string
-    }
-}
 
-const Page: FC<Props> = ({searchParams}) => {
+const Page = async() => {
     const handleAuth = async (fd: FormData) => {
         'use server'
         try {
@@ -21,7 +17,7 @@ const Page: FC<Props> = ({searchParams}) => {
                     email: fd.get('email'),
                     password: fd.get('password')
                 }),
-                credentials: 'include',
+                // credentials: 'include',
             })
             console.log(res)
 

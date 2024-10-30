@@ -40,12 +40,6 @@ const UserLoginForm: FC<Props> = ({handleAuth}) => {
                 })
 
                 if(res.ok) {
-                    const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
-                    setCookie('ai-tarot', cookieValue, {
-                        priority: 'high',
-                        sameSite: 'lax',
-                        httpOnly: true
-                    });
                     await fetchConfiguration();
                     router.push('/chat/new')
                 }

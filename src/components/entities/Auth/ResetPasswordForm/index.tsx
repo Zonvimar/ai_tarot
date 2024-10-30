@@ -1,3 +1,4 @@
+'use client'
 import TextField from '@/components/shared/Inputs/TextField'
 import React, {FC} from 'react'
 import FormWrapper from "@/components/shared/FormWrapper";

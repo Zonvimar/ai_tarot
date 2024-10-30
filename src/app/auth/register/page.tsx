@@ -1,19 +1,18 @@
-import UserProfileForm from '../../../components/entities/Auth/UserRegisterForm'
 import {checkEmailExists, registerAccount} from '@/lib/serverActions/auth'
-import React, {FC} from 'react'
+import React, {FC, Suspense} from 'react'
 import {redirect} from "next/navigation";
+import UserProfileForm from "@/components/entities/Auth/UserRegisterForm";
 
 type Props = {
     searchParams: {
-        add_info: string,
+        add_info?: string,
         onboardQuestion?: string,
     }
 }
 
-const Page: FC<Props> = ({searchParams}) => {
-    const onboardQuestion = searchParams.onboardQuestion
+const Page: FC<Props> = async({searchParams}) => {
+    const onboardQuestion = searchParams?.onboardQuestion || undefined
     const handleRegister = async (fd: FormData) => {
-        'use server'
         const res = await checkEmailExists(fd)
         if (res.status === 'ok') {
             onboardQuestion ?
@@ -25,7 +24,6 @@ const Page: FC<Props> = ({searchParams}) => {
     }
 
     const handleAddInfo = async (fd: FormData) => {
-        'use server'
         const res = await registerAccount(fd)
         return res
     }

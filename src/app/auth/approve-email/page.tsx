@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {FC, Suspense} from 'react'
 import {redirect} from "next/navigation";
 import {approveEmail, confirmReset} from "@/lib/serverActions/auth";
 import VerifyEmailCodeForm from "../../../components/entities/Auth/VerifyEmailCodeForm";
@@ -43,14 +43,14 @@ const Page: FC<Props> = async({searchParams}) => {
 
 
     return (
-        <>
+        <Suspense>
             <VerifyEmailCodeForm
                 handleVerify={handleVerify}
                 handleCheck={handleCheck}
                 resetPassword={resetPassword}
                 email={email}
             />
-        </>
+        </Suspense>
     )
 }
 

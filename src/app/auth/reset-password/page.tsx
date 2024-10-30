@@ -17,9 +17,9 @@ const Page: FC<Props> = async({searchParams}) => {
     const handleReset = async (fd: FormData) => {
         'use server'
         const res = await confirmReset(fd)
-        // if (res.status === 'ok') {
+        if (res.status === 'ok') {
             redirect(`/auth/approve-email?email=${fd.get('email')}&resetPassword=true`)
-        // }
+        }
         return res
     }
 

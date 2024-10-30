@@ -3,13 +3,8 @@ import React, {FC} from 'react'
 import {redirect} from "next/navigation";
 import NewPasswordForm from "@/components/entities/Auth/NewPasswordForm";
 
-type Props = {
-    searchParams: {
-        [key: string]: string
-    }
-}
 
-const Page: FC<Props> = ({searchParams}) => {
+const Page = async() => {
     const handleResetPassword = async (fd: FormData) => {
         'use server'
         const res = await loginIntoAccount(fd)
