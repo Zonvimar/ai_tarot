@@ -4,6 +4,7 @@ type Spread = {
     cards: string[],
     answer: string,
     date: string,
+    images: string[]
 }
 
 export type {

@@ -9,19 +9,23 @@ import MobileMainPage from "@/components/entities/Main/MainPageForm/MobileMainPa
 type Props = {
     olderSpreads: Spread[],
     handleAskQuestion: (fd: FormData) => Promise<ActionResponse>,
+    searchParams: {
+        // onboardQuestion?: string
+        chatId?: string
+    }
 }
 
 
-const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion}) => {
+const MainPageForm: FC<Props> = ({olderSpreads, handleAskQuestion, searchParams}) => {
     const isDesktop = useMediaQuery({ minWidth: 1024 });
 
 
     return (
         <>
             {isDesktop ?
-                <DesktopMainPage olderSpreads={olderSpreads}/>
+                <DesktopMainPage olderSpreads={olderSpreads} searchParams={searchParams}/>
                 :
-                <MobileMainPage olderSpreads={olderSpreads}/>
+                <MobileMainPage olderSpreads={olderSpreads} searchParams={searchParams}/>
             }
 
         </>

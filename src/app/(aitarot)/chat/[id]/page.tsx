@@ -28,7 +28,7 @@ const Page: FC<Props> = async({searchParams, params}) => {
     } else {
         return (
             <>
-                <HistoryChat spread={data}/>
+                <HistoryChat messages={[{message: data.question, isUser: true}, {message: data.answer, isUser: false}]}/>
             </>
         )
     }

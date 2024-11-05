@@ -5,9 +5,14 @@ import {Spread} from "@/lib/types/spread.types";
 import fetchService from "@/configs/http-service/fetch-settings";
 import {askOnboardQuestion} from "@/lib/serverActions/chat";
 
+type Props = {
+    searchParams: {
+        chatId?: string
+        startScreen?: string
+    }
+}
 
-
-const Page = async() => {
+const Page: FC<Props> = async({searchParams}) => {
 
     const {ok, data} = await
         fetchService.get<Spread[]>('api/spread/all/', {
@@ -29,7 +34,7 @@ const Page = async() => {
     }
     return (
         <>
-            <MainPageForm olderSpreads={data} handleAskQuestion={handleAskQuestion}/>
+            <MainPageForm olderSpreads={data} searchParams={searchParams} handleAskQuestion={handleAskQuestion}/>
         </>
     )
 }

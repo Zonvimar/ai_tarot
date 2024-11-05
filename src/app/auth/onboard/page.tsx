@@ -10,19 +10,10 @@ type Props = {
 }
 
 const Page: FC<Props> = async({searchParams}) => {
-    const handleAskQuestion = async (fd: FormData) => {
-        'use server'
-        const res = await askOnboardQuestion(fd)
-        if (res.status === 'ok') {
-            redirect(`/auth/register?onboardQuestion=${fd.get('question')}`)
-        }
-        return res
-    }
+
     return (
         <>
-            <OnBoardChatForm
-                handleAskQuestion={handleAskQuestion}
-            />
+            <OnBoardChatForm/>
         </>
 
     )

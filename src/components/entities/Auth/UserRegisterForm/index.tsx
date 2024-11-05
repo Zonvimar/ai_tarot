@@ -12,14 +12,16 @@ import {I18nProvider} from "@react-aria/i18n";
 import ImageBlock from "@/components/entities/Auth/ImageBlock";
 import fetchService from "@/configs/http-service/fetch-settings";
 import {setCookie} from "cookies-next";
+import {registerAccount} from "@/lib/serverActions/auth";
+import {useConfiguration} from "@/components/providers/ConfigurationProvider";
 
 type Props = {
-    handleAddInfo: ((fd: FormData) => Promise<ActionResponse>),
-    handleRegister: ((fd: FormData) => Promise<ActionResponse>),
-    onboardQuestion: string | undefined,
+    handleCheckEmail: ((fd: FormData) => Promise<ActionResponse>),
+    onboardQuestion: boolean,
 }
 
-const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister, onboardQuestion}) => {
+const UserProfileForm: FC<Props> = ({handleCheckEmail, onboardQuestion}) => {
+    const { fetchConfiguration } = useConfiguration()
     const [value, setValue] = useState("");
     const [emailValue, setEmailValue] = useState("");
     const [emailExists, setEmailExists] = useState(false);
@@ -46,10 +48,8 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister, onboardQuest
         return value.length < 8
     }, [value])
 
-    const handleSubmitRegister = async (fd: FormData) => {
-        // 'use server'
-        const res = await handleAddInfo(fd)
-
+    const handleRegister = async (fd: FormData) => {
+        const res = await registerAccount(fd)
         if (res.status === 'ok') {
             try {
                 const res = await fetchService.post('api/account/login/', {
@@ -66,17 +66,11 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister, onboardQuest
                 })
 
                 if(res.ok) {
-                    const cookieValue = res.headers.get('Set-Cookie') || '';  // Provide a default empty string if null
-                    setCookie('ai-tarot', cookieValue, {
-                        priority: 'high',
-                        sameSite: 'lax',
-                        httpOnly: true
-                    });
-
+                    await fetchConfiguration();
                     onboardQuestion ?
-                        router.push(`/chat/new?onboardQuestion=${onboardQuestion}`)
+                        router.push(`/auth/approve-email?onboardQuestion=${onboardQuestion}&email=${emailValue}`)
                         :
-                        router.push(`/chat/new`)
+                        router.push(`/auth/approve-email?email=${emailValue}`)
                 }
                 console.log(res)
             } catch (e) {
@@ -104,7 +98,7 @@ const UserProfileForm: FC<Props> = ({handleAddInfo, handleRegister, onboardQuest
             {/*<div className={'flex flex-col justify-center gap-4 h-full'}>*/}
             {/*    */}
                 <div className={'grid place-items-start h-full'}>
-                    <FormWrapper action={addInfo ? handleSubmitRegister : handleRegister}
+                    <FormWrapper action={addInfo ? handleRegister : handleCheckEmail}
                                  infoUnderButton={!addInfo &&
                                      <div className={'flex gap-1 text-center w-full items-center'}>
                                          <p className={'text-xs w-full text-center text-[#BEBEBE]'}>

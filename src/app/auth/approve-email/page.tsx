@@ -14,7 +14,7 @@ type Props = {
 
 const Page: FC<Props> = async({searchParams}) => {
     const email = searchParams.email ?? 'failed'
-    const onboardQuestion = searchParams.onboardQuestion
+    const onboardQuestion = !!searchParams.onboardQuestion
     const resetPassword = !!searchParams.resetPassword
 
 
@@ -26,7 +26,7 @@ const Page: FC<Props> = async({searchParams}) => {
             onboardQuestion ?
                 redirect(`/chat/new?addInfo=true&onboardQuestion=${onboardQuestion}`)
                 :
-                redirect(`/chat/new`)
+                redirect(`/?startScreen=true`)
         }
         return res
     }

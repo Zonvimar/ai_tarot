@@ -5,32 +5,42 @@ import {useRouter} from "next/navigation";
 import MessagesDisplay from "@/components/entities/message/MessageDisplay";
 import QuestionInput from "@/components/shared/Inputs/QuestionInput";
 import fetchAnswer from "@/lib/clientActions/chat/fetch-answer";
+import {useMediaQuery} from "react-responsive";
 
 interface Message {
     message: string
     isUser: boolean
+    images?: string[]
 }
 
-const NewChatForm = ({onboardQuestion}: {onboardQuestion: string | undefined}) => {
+const NewChatForm = ({onboardQuestion}: {onboardQuestion: boolean}) => {
     const router = useRouter();
     const { fetchConfiguration, configuration } = useConfiguration();
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
+    const [aitaIsTyping, setAitaIsTyping] = useState(false);
     const [questionInputValue, setQuestionInputValue] = useState('');
+    const isDesktop = useMediaQuery({ minWidth: 1024 });
 
-    const handleAskQuestion = useCallback(async (question: string) => {
+    const handleAskQuestion = async (question: string) => {
         // console.log('Asking question:', question); // Логируем вопрос
         setMessages([{ message: question, isUser: true }]);
         setQuestionInputValue('');
-        await fetchAnswer(question, setMessages, fetchConfiguration, setLoading, router);
-    }, [fetchConfiguration, router]);
+        await fetchAnswer(question, setMessages, fetchConfiguration, setLoading, setAitaIsTyping, router);
+    }
 
     useEffect(() => {
-        console.log('onboardQuestion:', onboardQuestion); // Логируем onboardQuestion
-        if (onboardQuestion && !messages.some(msg => msg.message === onboardQuestion)) {
-            handleAskQuestion(onboardQuestion);
+        const getOnboardQuestion = async () => {
+            const question = localStorage.getItem('onboardQuestion') as string;
+            await handleAskQuestion(question);
+            localStorage.removeItem('onboardQuestion');
         }
-    }, [onboardQuestion]);
+        if (isDesktop) {
+            router.push('/')
+        } else if (onboardQuestion) {
+            getOnboardQuestion()
+        }
+    }, []);
 
 
     return (
@@ -38,7 +48,7 @@ const NewChatForm = ({onboardQuestion}: {onboardQuestion: string | undefined}) =
             <div className="grid place-items-start h-full">
                 <div className="flex flex-col min-h-[calc(100dvh-58px)] h-full justify-center gap-2 w-full">
                     <MessagesDisplay messages={messages} userName={configuration?.currentUser.username}
-                                     loading={loading}/>
+                                     loading={aitaIsTyping}/>
                     <QuestionInput
                         questionInputValue={questionInputValue}
                         setQuestionInputValue={setQuestionInputValue}

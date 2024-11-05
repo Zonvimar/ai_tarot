@@ -1,9 +1,42 @@
+'use client'
 import {Image} from "@nextui-org/image";
 import {Button} from "@nextui-org/react";
 import React from "react";
+import fetchService from "@/configs/http-service/fetch-settings";
+import {StripeSessionType} from "@/lib/types/stripe-session.types";
+import {useRouter} from "next/navigation";
 
 
 const SubscriptionForm = () => {
+    const router = useRouter();
+
+    const pay = async() => {
+        const res = await fetchService.post<{sessionId: string}>('api/payments/create-session', {
+            body: JSON.stringify({
+                amount: 499,
+                description: 'Buy Subscription',
+            }),
+            credentials: 'include',
+            source: 'client',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if(res.ok) {
+            const sessionId = res.data.sessionId
+            const sessionRes = await fetchService.get<StripeSessionType>(`api/payments/session/${sessionId}`, {
+                credentials: 'include',
+                source: 'client',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if(sessionRes.ok) {
+                router.push(sessionRes.data.url)
+            }
+        }
+    }
 
     return (
         <div className="flex flex-col gap-6 min-h-[calc(100dvh-58px)] justify-end">
@@ -34,7 +67,7 @@ const SubscriptionForm = () => {
 
                 <p className="text-sm lg:text-lg">100 Oracles = 1 Question</p>
                 <div className={'flex w-full flex-col gap-6 pb-3 lg:pb-7 px-4'}>
-                    <Button
+                    <Button onClick={() => pay()}
                         className={`flex items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`}>
                         Subscribe <span className={'font-normal'}>USD 4.99</span>
                     </Button>

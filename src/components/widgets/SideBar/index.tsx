@@ -7,6 +7,7 @@ import {X} from "lucide-react";
 import Link from "next/link";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
 import LogoutButton from "@/components/shared/LogoutButton";
+import {useRouter} from "next/navigation";
 
 interface Props {
     open: boolean,
@@ -16,7 +17,9 @@ interface Props {
 
 const SideBar: FC<Props> = ({ open, setOpen }) => {
     const { configuration } = useConfiguration();
+    const router = useRouter()
     const hideSidebar = () => setOpen(false);
+
     return (
         <>
             {open && (
@@ -33,7 +36,7 @@ const SideBar: FC<Props> = ({ open, setOpen }) => {
                 <li className={`w-full flex lg:pt-7 pt-2 lg:pr-4 ${configuration?.currentUser.isAuthenticated ? 'justify-between' : 'justify-end'} items-center lg:justify-end`}>
                     {configuration?.currentUser.isAuthenticated &&
                         <div className={'w-full'}>
-                            <div
+                            <div onClick={() => router.push('/buy/oracles')}
                                 className={'text-medium lg:hidden w-fit ml-2 sm:text-lg flex items-center gap-1 bg-[#2A2A2A] h-[40px] rounded-3xl px-4 py-1.5'}>
                                 <p className={'flex items-end justify-end'}>{configuration?.currentUser.balance} Oracles</p>
                                 <Image src={'/oracle-icon.svg'} height={22} width={24}/>
@@ -50,12 +53,12 @@ const SideBar: FC<Props> = ({ open, setOpen }) => {
                         <>
                             <div className={'flex flex-col gap-1'}>
                                 <li onClick={hideSidebar} className="w-full pl-2 font-semibold text-xl text-[#27ACC9]">
-                                    <Link href={'/'} className={''}>
+                                    <Link href={'/buy/oracles'} className={''}>
                                         Add oracles
                                     </Link>
                                 </li>
                                 <li onClick={hideSidebar} className="w-fit hidden lg:flex">
-                                    <div
+                                    <div onClick={() => router.push('/buy/oracles')}
                                         className={'text-medium sm:text-lg flex items-center gap-1 bg-[#2A2A2A] h-[40px] rounded-3xl px-3 py-1.5'}>
                                         <p className={'flex items-end justify-end'}>{configuration?.currentUser.balance}</p>
                                         <Image src={'/oracle-icon.svg'} height={22} width={24}/>

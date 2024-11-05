@@ -10,6 +10,8 @@ const BackButton = () => {
     const getLink = () => {
         switch (true) {
             case pathname === '/chat/new':
+            case pathname === '/payment/error':
+            case pathname === '/payment/success':
             case /^\/chat\/\d+$/.test(pathname):
                 return '/';
             case pathname === '/auth/register':
@@ -38,6 +40,8 @@ const BackButton = () => {
             case pathname === '/auth/new-password':
             case pathname === '/buy/oracles':
             case pathname === '/buy/subscription':
+            case pathname === '/payment/error':
+            case pathname === '/payment/success':
                 return true;
             default:
                 return false;

@@ -14,7 +14,7 @@ const Page: FC<Props> = async({searchParams}) => {
 
     return (
         <>
-            <NewChatForm onboardQuestion={searchParams.onboardQuestion}/>
+            <NewChatForm onboardQuestion={!!searchParams.onboardQuestion}/>
         </>
     )
 }

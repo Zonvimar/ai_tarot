@@ -14,6 +14,7 @@ const config: Config = {
                 'spread-card': '0px 2px 14px 0px rgba(34, 135, 157, 0.65)',
                 'button': '0px 4px 14px 0px rgba(34, 135, 157, 1)',
                 'sub-card': '0px 4px 15px 0px rgba(39, 172, 201, 1)',
+                'inset': 'inset 0 0 0 5px transparent',
                 // 'add-oracles': '0px 4px 14px 0px rgba(34, 135, 157, 1)',
             },
             backdropBlur: {

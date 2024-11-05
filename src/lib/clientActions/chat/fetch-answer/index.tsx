@@ -1,6 +1,7 @@
 import React from "react";
 import fetchService from '@/configs/http-service/fetch-settings';
 import {Spread} from "@/lib/types/spread.types";
+import fetchImages from "@/lib/clientActions/chat/get-images";
 
 interface Message {
     message: string;
@@ -12,9 +13,11 @@ const fetchAnswer = async (
     setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
     fetchConfiguration: () => Promise<void>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setAitaIsTyping: React.Dispatch<React.SetStateAction<boolean>>,
     router: any
 ) => {
     setLoading(true);
+    setAitaIsTyping(true);
     try {
         console.log('Fetching answer:', question);
         const res = await fetchService.post<Spread>('api/spread/create/', {
@@ -25,10 +28,10 @@ const fetchAnswer = async (
         });
 
         if (res.ok) {
-            const { answer } = res.data;
+            const { answer, images } = res.data;
             setMessages(prev => {
                 if (!prev.some(msg => msg.message === answer)) {
-                    return [...prev, {message: answer, isUser: false}];
+                    return [...prev, {message: answer, isUser: false, images}];
                 }
                 return prev;
             })
@@ -39,7 +42,7 @@ const fetchAnswer = async (
     } catch (error) {
         console.error('Error fetching answer:', error);
     } finally {
-        setLoading(false);
+        setAitaIsTyping(false);
     }
 };
 
