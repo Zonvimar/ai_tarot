@@ -72,7 +72,7 @@ const OnBoardChatForm = () => {
                                         className={`${!showSecondMessage && 'hidden'} px-4 py-3 flex items-end flex-col bg-[#343434] rounded-tr-2xl rounded-b-3xl`}>
                                         <p className={''}>
                                             Ask me a question for
-                                            <span className={'font-bold'}>a free tarot reading</span>,
+                                            <span className={'font-bold'}>{' a free tarot reading'}</span>,
                                             with text and voice messages included! 🔮
                                         </p>
                                         <span className={''}>

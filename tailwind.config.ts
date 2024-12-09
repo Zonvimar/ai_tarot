@@ -36,11 +36,19 @@ const config: Config = {
                 scaleUpDown: 'scaleUpDown 2s ease-in-out infinite',
                 scaleUpDown2: 'scaleUpDown 2s ease-in-out 0.3s infinite',
                 scaleUpDown3: 'scaleUpDown 2s ease-in-out 0.6s infinite',
+                waves: "waveDeform 6s infinite ease-in-out",
             },
             keyframes: {
                 scaleUpDown: {
                     '0%, 100%': { transform: 'scale(1)' },
                     '30%': { transform: 'scale(1.3)' },
+                },
+                waveDeform: {
+                    "0%": { transform: "scale(1) rotate(0deg)" },
+                    "25%": { transform: "scale(1.05) rotate(90deg)" },
+                    "50%": { transform: "scale(1.1) rotate(180deg)" },
+                    "75%": { transform: "scale(1.05) rotate(270deg)" },
+                    "100%": { transform: "scale(1) rotate(360deg)" },
                 },
             },
         },

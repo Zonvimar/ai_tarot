@@ -29,14 +29,14 @@ interface Message {
     isUser: boolean
 }
 
-const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
+const LaptopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const [isStartScreen, setIsStartScreen] = useState(!!searchParams?.startScreen);
     const showSidebar = () => setSidebarVisible(true);
     const router = useRouter();
     const pathname = usePathname();
-    const [spreadCompleted, setSpreadCompleted] = useState(!!searchParams.chatId);
     const { fetchConfiguration, configuration } = useConfiguration();
+    const [spreadCompleted, setSpreadCompleted] = useState(!!searchParams.chatId);
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
     const [aitaIsTyping, setAitaIsTyping] = useState(false);
@@ -96,7 +96,7 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                     "bg-center bg-cover items-center justify-start"}>
                     <div className={'grid place-items-start h-full'}>
                         <div
-                            className={`flex flex-col px-2 h-full  min-w-[450px] justify-center gap-2 w-full`}>
+                            className={`flex flex-col px-2 h-full  min-w-[400px] justify-center gap-2 w-full`}>
                             <div
                                 className={`flex-grow overflow-y-auto`}>
                                 <div
@@ -126,26 +126,17 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                     </div>
                                 </div>
                             </div>
-                            {/*<div*/}
-                            {/*    className="flex-shrink-0 flex justify-center  flex-col pb-3 gap-2 w-full ifems-center">*/}
-                            {/*    <Button onClick={() => router.push('/chat/new')}*/}
-                            {/*            className={`flex items-center gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`}>*/}
-                            {/*        Get a Tarot reading*/}
-                            {/*    </Button>*/}
-                            {/*    /!*<SubmitButton label={'Get a Tarot reading'}/>*!/*/}
-                            {/*</div>*/}
                         </div>
                     </div>
-
+                </div>
+                <div
+                    className={"flex relative justify-start pl-5 items-center bg-gradient-main-left bg-no-repeat bg-cover bg-top min-h-[calc(100dvh)] h-full w-full"}>
                     <div className="grid place-items-start h-full">
                         <div
-                            className="flex flex-col min-h-[calc(100dvh-58px)] w-[580px] justify-between gap-2">
+                            className="flex flex-col min-h-[calc(100dvh-58px)] w-[550px] justify-between gap-2">
                             <div className={`flex h-full justify-center gap-2 w-full`}>
-                                {/*<div*/}
-                                {/*    className={`flex-grow overflow-y-auto`}>*/}
                                 <div className={'flex flex-col w-full items-center gap-4 h-full pr-4'}>
                                     <div className={'z-10 gap-2 flex justify-between w-full pt-1'}>
-                                        {/*<p className={'text-xl sm:text-3xl font-semibold'}>Aita, ai tarologist</p>*/}
                                         <div
                                             className={'w-full flex gap-1 items-center justify-start text-xl sm:text-2xl font-semibold'}>
                                             Chat with Aita
@@ -156,8 +147,10 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                                   className={'text-lg font-semibold w-fit text-[#27ACC9] hover:underline text-center'}>
                                                 Add Oracles
                                             </Link>
-                                            <div onClick={() => {router.push('/buy/oracles')}}
-                                                className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
+                                            <div onClick={() => {
+                                                router.push('/buy/oracles')
+                                            }}
+                                                 className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
                                                 <p className={'flex items-end justify-end'}>{configuration?.currentUser.balance}</p>
                                                 <Image src={'/oracle-icon.svg'} height={22} width={24}/>
                                             </div>
@@ -175,7 +168,7 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                                  loading={aitaIsTyping}/>
                             }
 
-                            {!!searchParams.chatId ?
+                            {spreadCompleted ?
                                 <div
                                     className="flex-shrink-0 z-10 flex justify-center flex-col pb-3 gap-2 ifems-center">
                                     <p className={'text-2xl font-normal text-center text-[#BEBEBE]'}>
@@ -201,11 +194,6 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                             }
                         </div>
                     </div>
-
-
-                </div>
-                <div
-                    className={"flex relative justify-center items-center bg-gradient-main-left bg-no-repeat bg-cover bg-top min-h-[calc(100dvh)] h-full w-full"}>
                     <div className={'absolute right-7 top-8'}>
                         <Button isIconOnly
                                 className={'flex items-center justify-center bg-[rgba(69,69,69,0.5)] backdrop-blur-3xl rounded-full h-10 w-10'}
@@ -225,4 +213,4 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
     )
 }
 
-export default DesktopMainPage
+export default LaptopMainPage

@@ -22,6 +22,7 @@ const MobileMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
     const [isStartScreen, setIsStartScreen] = useState(!!searchParams?.startScreen);
     const [questionInputValue, setQuestionInputValue] = useState('');
     const [loading, setLoading] = useState(false);
+    const [spreadCompleted, setSpreadCompleted] = useState(!!searchParams.chatId);
 
     const handleAskQuestion = () => {
         setLoading(true)

@@ -1,5 +1,6 @@
 type Spread = {
     id: number,
+    spreadCompleted: boolean,
     question: string,
     cards: string[],
     answer: string,

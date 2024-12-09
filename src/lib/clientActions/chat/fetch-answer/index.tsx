@@ -11,6 +11,7 @@ interface Message {
 const fetchAnswer = async (
     question: string,
     setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
+    setSpreadCompleted: React.Dispatch<React.SetStateAction<boolean>>,
     fetchConfiguration: () => Promise<void>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setAitaIsTyping: React.Dispatch<React.SetStateAction<boolean>>,
@@ -28,7 +29,9 @@ const fetchAnswer = async (
         });
 
         if (res.ok) {
-            const { answer, images } = res.data;
+            const { answer, images, spreadCompleted } = res.data;
+            setSpreadCompleted(spreadCompleted)
+            setLoading(false);
             setMessages(prev => {
                 if (!prev.some(msg => msg.message === answer)) {
                     return [...prev, {message: answer, isUser: false, images}];

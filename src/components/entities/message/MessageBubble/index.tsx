@@ -45,7 +45,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isUser, userName
                     <p>Aita</p>
                 </div>
                 <div className="px-4 py-3 bg-[#343434] max-w-[80%] rounded-tr-2xl rounded-b-3xl">
-                    <p className={'whitespace-pre-wrap break-words'}>{message.slice(2)}</p>
+                    <p className={'whitespace-pre-wrap break-words'}>{message}</p>
                 </div>
                 {!!images?.length &&
                     <div
