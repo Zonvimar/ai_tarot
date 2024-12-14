@@ -30,7 +30,7 @@ const LogoutButton = () => {
 
     return (
         <>
-            <Link onClick={(e) => handleLogout(e)} href={'/auth/onboard'}>
+            <Link className={"text-[#c4c4c4] hover:text-[#ffffff] transition-colors"} onClick={(e) => handleLogout(e)} href={'/auth/onboard'}>
                 Log Out
             </Link>
         </>

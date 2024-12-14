@@ -157,7 +157,7 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                                 Add Oracles
                                             </Link>
                                             <div onClick={() => {router.push('/buy/oracles')}}
-                                                className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
+                                                className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] hover:bg-[#3b3b39] transition-colors cursor-pointer rounded-3xl px-3 py-1.5'}>
                                                 <p className={'flex items-end justify-end'}>{configuration?.currentUser.balance}</p>
                                                 <Image src={'/oracle-icon.svg'} height={22} width={24}/>
                                             </div>
@@ -187,7 +187,7 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                         <Image src={'/arrowToNewChat.svg'} height={16} width={16} radius={'none'}/>
                                     </div>
                                     <Button onClick={() => getNewTarotReading()}
-                                            className={`flex items-center mx-7 gap-2 sticky shadow-button bg-[#27ACC9] h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`}>
+                                            className={`flex items-center mx-7 gap-2 sticky shadow-button bg-[#27ACC9] data-[hover=true]:bg-[#32cbed] transition-colors h-[60px] sm:h-[76px] font-semibold text-xl sm:text-2xl rounded-[60px]`}>
                                         Get a Tarot reading
                                     </Button>
                                 </div>

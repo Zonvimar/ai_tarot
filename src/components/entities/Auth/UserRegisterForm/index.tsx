@@ -134,7 +134,7 @@ const UserProfileForm: FC<Props> = ({handleCheckEmail, onboardQuestion}) => {
                                             required
                                             label={'Name'}
                                             className={'text-xl'}
-                                            placeholder={'Georgii'}
+                                            placeholder={'Your Name'}
                                             name={'username'}
                                             errorMessage={'lfkasjdklfjd'}
                                             // type={'email'}

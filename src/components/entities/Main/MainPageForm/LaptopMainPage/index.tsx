@@ -150,7 +150,7 @@ const LaptopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                             <div onClick={() => {
                                                 router.push('/buy/oracles')
                                             }}
-                                                 className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] rounded-3xl px-3 py-1.5'}>
+                                                 className={'text-sm sm:text-lg flex items-center gap-1 bg-[#2A2A2A] hover:bg-[#3b3b39] transition-colors cursor-pointer rounded-3xl px-3 py-1.5'}>
                                                 <p className={'flex items-end justify-end'}>{configuration?.currentUser.balance}</p>
                                                 <Image src={'/oracle-icon.svg'} height={22} width={24}/>
                                             </div>
