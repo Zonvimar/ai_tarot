@@ -27,6 +27,7 @@ interface Props {
 interface Message {
     message: string
     isUser: boolean
+    images?: string[]
 }
 
 const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
