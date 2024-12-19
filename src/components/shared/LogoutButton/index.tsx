@@ -1,8 +1,6 @@
 import React from "react";
 import {useRouter} from "next/navigation";
 import {deleteCookie} from "cookies-next";
-import {TOKENS_KEYS} from "@/configs/http-service/constants/authTokens";
-import fetchService from "@/configs/http-service/fetch-settings";
 import Link from "next/link";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
 import BASE_URL from "@/configs/http-service/constants/baseUrl";
@@ -24,7 +22,6 @@ const LogoutButton = () => {
         if(res.status === 401) {
             router.push('/auth/onboard')
         }
-        console.log(res)
         router.push('/auth/onboard')
     }
 

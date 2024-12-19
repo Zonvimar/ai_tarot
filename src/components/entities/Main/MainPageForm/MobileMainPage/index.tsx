@@ -43,7 +43,7 @@ const MobileMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                             Nice to meet you 👋
                         </h1>
                     </ImageBlock>
-                    {isStartScreen ?
+                    {isStartScreen && !!searchParams?.startScreen ?
                         <WelcomeMessage isDesktop={false}/>
                         :
                         <div
@@ -60,7 +60,7 @@ const MobileMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                 </div>
 
             </div>
-            {isStartScreen ?
+            {isStartScreen && !!searchParams?.startScreen ?
                 <QuestionInput
                     questionInputValue={questionInputValue}
                     setQuestionInputValue={setQuestionInputValue}

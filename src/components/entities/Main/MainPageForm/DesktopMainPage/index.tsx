@@ -30,6 +30,7 @@ interface Message {
 }
 
 const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
+    const [oldSpreads, setOldSpreads] = useState(olderSpreads);
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const [isStartScreen, setIsStartScreen] = useState(!!searchParams?.startScreen);
     const showSidebar = () => setSidebarVisible(true);
@@ -51,7 +52,6 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
     }, [fetchConfiguration, router]);
 
     useEffect(() => {
-        console.log(searchParams)
         const getOlderSpread = async () => {
             const res = await fetchService.get<Spread>(`api/spread/view/${searchParams.chatId}/`, {
                 credentials: 'include',
@@ -62,10 +62,9 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
             })
 
             if (res.ok) {
-                console.log(res.data)
                 setMessages([
                     { message: res.data.question, isUser: true },
-                    { message: res.data.answer, isUser: false }
+                    { message: res.data.answer, isUser: false, images: res.data.images }
                 ]);
             }
         }
@@ -75,9 +74,31 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
         }
     }, [searchParams.chatId]);
 
+    useEffect(() => {
+        const getSpreads = async () => {
+            const res = await fetchService.get<Spread[]>('api/spread/all/', {
+                credentials: 'include',
+                source: 'client',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+
+            if (res.ok) {
+                setOldSpreads(res.data);
+            } else {
+                console.error('Error fetching spreads:', res.data);
+            }
+
+        }
+
+        getSpreads();
+    }, [spreadCompleted]);
+
     const getNewTarotReading = () => {
         setMessages([])
         setLoading(false)
+        setSpreadCompleted(false)
         router.push('/');
     }
 
@@ -119,7 +140,7 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                         }
 
                                         {
-                                            olderSpreads.map((spread: Spread) => (
+                                            oldSpreads.map((spread: Spread) => (
                                                 <SpreadCard spread={spread} redirectType={'params'}/>
                                             ))
                                         }
@@ -153,7 +174,7 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
                                         </div>
                                         <div className='w-full flex gap-3 items-center justify-end'>
                                             <Link href={'/buy/oracles'}
-                                                  className={'text-lg font-semibold w-fit text-[#27ACC9] hover:underline text-center'}>
+                                                  className={'text-lg font-semibold w-fit text-[#27ACC9] hover:text-[#32CBED] transition-colors text-center'}>
                                                 Add Oracles
                                             </Link>
                                             <div onClick={() => {router.push('/buy/oracles')}}
@@ -167,15 +188,15 @@ const DesktopMainPage: FC<Props> = ({olderSpreads, searchParams}) => {
 
                                 </div>
                             </div>
-                            {isStartScreen ?
+                            {isStartScreen && !!searchParams?.startScreen ?
                                 <WelcomeMessage isDesktop={true}/>
                                 :
-                                <MessagesDisplay messages={messages} isDesktop isHistoryChat={!!searchParams?.chatId}
+                                <MessagesDisplay messages={messages} isDesktop isHistoryChat={!!searchParams.chatId || spreadCompleted}
                                                  userName={configuration?.currentUser.username}
                                                  loading={aitaIsTyping}/>
                             }
 
-                            {!!searchParams.chatId ?
+                            {!!searchParams.chatId || spreadCompleted ?
                                 <div
                                     className="flex-shrink-0 z-10 flex justify-center flex-col pb-3 gap-2 ifems-center">
                                     <p className={'text-2xl font-normal text-center text-[#BEBEBE]'}>

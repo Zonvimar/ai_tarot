@@ -3,7 +3,6 @@ import {Spread} from "@/lib/types/spread.types";
 import {Image} from "@nextui-org/image";
 import React, {FC} from "react";
 import {useRouter} from "next/navigation";
-import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 
 type SpreadCardProps = {

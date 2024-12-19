@@ -1,8 +1,7 @@
 'use client'
-import React, {useCallback, useEffect, useState} from 'react'
-import {Spread} from "@/lib/types/spread.types";
+import React from 'react'
 import {useRouter} from "next/navigation";
-import {Avatar, Button} from "@nextui-org/react";
+import {Button} from "@nextui-org/react";
 import {useConfiguration} from "@/components/providers/ConfigurationProvider";
 import {Image} from "@nextui-org/image";
 import {Message} from "@/lib/types/message.types";

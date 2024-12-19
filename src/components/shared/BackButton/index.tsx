@@ -21,6 +21,7 @@ const BackButton = () => {
     const getLink = () => {
         switch (true) {
             case pathname === '/chat/new':
+            case pathname === '/':
             case pathname === '/payment/error':
             case pathname === '/payment/success':
             case /^\/chat\/\d+$/.test(pathname):
@@ -39,9 +40,9 @@ const BackButton = () => {
 
     const getLinkVisible = () => {
         switch (true) {
-            case pathname === '/':
             case pathname === '/auth/onboard':
                 return false;
+            case pathname === '/':
             case pathname === '/chat/new':
             case /^\/chat\/\d+$/.test(pathname):
             case pathname === '/auth':
