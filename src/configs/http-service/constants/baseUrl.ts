@@ -1,4 +1,4 @@
-const DEV_BASE_URL = 'https://aitarot.io/'
+const DEV_BASE_URL = 'https://esokey.online/'
 const PROD_BASE_URL = 'https://aitarot.io/'
 
 export const baseUrls = {
