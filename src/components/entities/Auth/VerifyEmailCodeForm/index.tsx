@@ -94,11 +94,19 @@ const VerifyEMailCodeForm: FC<Props> = ({resetPassword, email, handleCheck, hand
         }
     };
 
+    const handleVerifyEmail = async (fd: FormData) => {
+        const res = await handleVerify(fd)
+        if (res.status !== 'ok') {
+            setIsInvalid(true)
+        }
+        return res
+    }
+
 
     return (
         <>
             <div className={'grid place-items-start h-full'}>
-                <FormWrapper action={resetPassword ? handleCheck : handleVerify}
+                <FormWrapper action={resetPassword ? handleCheck : handleVerifyEmail}
                              infoUnderButton={
                                  <div className={'flex gap-1 text-center w-full items-center'}>
                                      <p className={'text-sm w-full text-[#BEBEBE] text-center'}>

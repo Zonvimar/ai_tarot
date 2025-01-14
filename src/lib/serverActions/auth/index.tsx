@@ -178,8 +178,12 @@ const confirmReset = async (fd: FormData): Promise<ActionResponse> => {
 
 const approveEmail = async (fd: FormData): Promise<ActionResponse> => {
     try {
-        const res = await fetchService.put(`api/account/confirm-email?confirmationCode=${fd.get('code')}`)
-        if(!res.ok) {
+        const res = await fetchService.post(`api/account/confirm-email/`, {
+            body: JSON.stringify({
+                code: fd.get('code'),
+            })
+        })
+        if(!res.data) {
             const message = res.data.detail
             throw new Error(message)
         } else {
