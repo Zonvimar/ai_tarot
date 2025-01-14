@@ -64,7 +64,9 @@ const loginIntoAccount = async (fd: FormData): Promise<ActionResponse> => {
             cookies().set(TOKENS_KEYS.access, cookieValue, {
                 priority: 'high',
                 sameSite: 'lax',
-                httpOnly: true
+                domain: 'api.aitarot.io',
+                httpOnly: true,
+                secure: true
             });
             console.info('Login successful, tokens have been installed')
         } else {
@@ -105,6 +107,9 @@ const registerAccount = async (fd: FormData): Promise<ActionResponse> => {
             cookies().set(TOKENS_KEYS.access, cookieValue, {
                 priority: 'high',
                 sameSite: 'lax',
+                domain: 'api.aitarot.io',
+                httpOnly: true,
+                secure: true
             });
             console.info('Login successful, tokens have been installed')
         } else {
